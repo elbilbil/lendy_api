@@ -1,16 +1,16 @@
 {
-  "name": "chauffeur",
+  "name": "driver",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "Nom": {
+    "firstName": {
       "type": "string",
       "required": true
     },
-    "prenom": {
+    "LastName": {
       "type": "string",
       "required": true
     },

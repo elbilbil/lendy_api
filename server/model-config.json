@@ -35,11 +35,11 @@
     "dataSource": "db",
     "public": false
   },
-  "chauffeur": {
+  "lender": {
     "dataSource": "db",
     "public": true
   },
-  "preteur": {
+  "driver": {
     "dataSource": "db",
     "public": true
   }
