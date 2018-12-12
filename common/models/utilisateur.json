@@ -1,5 +1,5 @@
 {
-  "name": "lender",
+  "name": "utilisateur",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -21,6 +21,13 @@
     "password": {
       "type": "string",
       "required": true
+    },
+    "role": {
+      "type": "string",
+      "required": true
+    },
+    "token": {
+      "type": "string"
     }
   },
   "validations": [],

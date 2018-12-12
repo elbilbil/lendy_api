@@ -35,11 +35,7 @@
     "dataSource": "db",
     "public": false
   },
-  "lender": {
-    "dataSource": "db",
-    "public": true
-  },
-  "driver": {
+  "utilisateur": {
     "dataSource": "db",
     "public": true
   }
