@@ -40,5 +40,43 @@
       "permission": "DENY"
     }
   ],
-  "methods": {}
+  "methods": {
+    "signin": {
+      "accepts": [
+        {
+          "arg": "email",
+          "type": "string",
+          "required": true,
+          "description": "l'email de l'utilisateur",
+          "http": {
+            "source": "form"
+          }
+        },
+        {
+          "arg": "password",
+          "type": "string",
+          "required": true,
+          "description": "le password de l'utilisateur",
+          "http": {
+            "source": "form"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "jwt",
+          "type": "string",
+          "root": true,
+          "description": "le webToken de l'utilisateur"
+        }
+      ],
+      "description": "sigin un utilisateur",
+      "http": [
+        {
+          "path": "/signin",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

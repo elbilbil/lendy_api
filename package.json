@@ -11,6 +11,7 @@
     "posttest": "npm run lint"
   },
   "dependencies": {
+    "bcrypt-nodejs": "*",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "helmet": "^3.10.0",
@@ -19,7 +20,11 @@
     "loopback-component-explorer": "^6.2.0",
     "loopback-connector-mongodb": "^3.9.2",
     "serve-favicon": "^2.0.1",
-    "strong-error-handler": "^3.0.0"
+    "strong-error-handler": "^3.0.0",
+    "passport": "*",
+    "jwt-simple": "*",
+    "passport-jwt": "*",
+    "passport-local": "*"
   },
   "devDependencies": {
     "eslint": "^3.17.1",
