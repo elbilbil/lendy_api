@@ -1,0 +1,8 @@
+YL\UserBundle\Entity\User:
+            type:  entity
+            table: yl_user
+            id:
+                id:
+                    type: integer
+                    generator:
+                        strategy: AUTO

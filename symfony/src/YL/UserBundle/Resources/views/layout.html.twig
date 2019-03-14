@@ -1,0 +1,38 @@
+{# src/YL/UserBundle/Resources/views/layout.html.twig #}
+
+{# On étend notre layout #}
+{% extends "YLCoreAppBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Connexion {% endblock %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block body %}
+
+    {# On affiche les messages flash que définissent les contrôleurs du bundle #}
+    {% for key, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ key }}">
+                {{ message|trans({}, 'FOSUserBundle') }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"></h3>
+            </div>
+            <div class="panel-body">
+                <fieldset>
+                    {# Le formulaire, avec URL de soumission vers la route « login_check » comme on l'a vu #}
+                    {# On définit ce block, dans lequel vont venir s'insérer les autres vues du bundle #}
+                    {% block fos_user_content %}
+                    {% endblock fos_user_content %}
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

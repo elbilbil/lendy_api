@@ -1,0 +1,36 @@
+{
+  "name": "lendy_api",
+  "version": "1.0.0",
+  "description": "Lendy back application server",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Aziz_Essid@bitbucket.org/eiplendy/lendy_api.git"
+  },
+  "author": "Lendy",
+  "dependencies": {
+    "base64-img": "^1.0.4",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.4",
+    "generate-password": "^1.4.1",
+    "i18next": "^10.6.0",
+    "i18next-express-middleware": "^1.4.1",
+    "jade": "^1.11.0",
+    "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.10",
+    "mailgun-js": "^0.20.0",
+    "mongoose": "^4.13.17",
+    "mongoose-unique-validator": "^1.0.6",
+    "node-geocoder": "^3.22.0",
+    "nodemon": "^1.18.5",
+    "passport": "^0.3.2",
+    "passport-jwt": "^4.0.0",
+    "qrcode": "^1.2.2",
+    "randomstring": "^1.1.5",
+    "xmlhttprequest": "^1.8.0"
+  }
+}

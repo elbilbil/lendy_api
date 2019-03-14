@@ -1,0 +1,1 @@
+dockerexec db mysqldump -u root -proot symfony --single-transaction  > symfony.sql
