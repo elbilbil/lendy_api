@@ -281,7 +281,7 @@ function postMessage(req, res) {
                         if (err) {
                             return res.status(400).json(err)
                         }
-                        disscussions[0].messages.push(message);
+                        disscussions[0].messages = disscussions[0].messages.concat([result]);
                         disscussions[0].save(function(err, result) {
                             if (err) {
                                 return res.status(400).json(err)
