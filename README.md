@@ -71,20 +71,48 @@ variable suivi de * sont des requires.
 
        Reception: (success: status 200)  
          {  
-             "_id": "5cc5fc196c2ab452e3c4e516",
-             "username": "vfrefe@gfrefer.fr",
-             "password": "fce92a3f272e2b66317611ecb80b9417526c429ca4b02d7ae7c71bf15d843a41",
-             "type": "preteur",
-             "role": "client",
-             "status": "enabled",
-             "__v": 0,
-             "cars": "Golden Proust",
-             "location": {
-                 "latitude": 43.31136,
-                 "longitude": 5.37049
+             "_id": "String",  
+             "username": "String",  
+             "password": "String",  
+             "type": "preteur, emprunteur",  
+             "role": "client",  
+             "status": "enabled",  
+             "__v": 0,  
+             "cars": "String",  
+             "location": {  
+                 "latitude": float,  
+                 "longitude": float  
              },
-             "sex": "Homme",
-             "createdAt": "2019-04-28T19:16:41.261Z"
+             "sex": "Homme, Femme, Autre",  
+             "createdAt": Date  
+         }  
+
+       Reception: (failed: status 40*)  
+         {  
+           "error" : "String"  
+         }  
+         
+- **{GET} /drivers** :  
+ 
+         *HEADER :  
+            Authorization : Bearer {token}  
+
+       Reception: (success: status 200)  
+         {  
+             "_id": "String",  
+             "username": "String",  
+             "password": "String",  
+             "type": "preteur, emprunteur",  
+             "role": "client",  
+             "status": "enabled",  
+             "__v": 0,  
+             "cars": "String",  
+             "location": {  
+                 "latitude": float,  
+                 "longitude": float  
+             },
+             "sex": "Homme, Femme, Autre",  
+             "createdAt": Date  
          }  
 
        Reception: (failed: status 40*)  
