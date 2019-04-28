@@ -9,19 +9,19 @@ Base Url : <b><span style="font-size:1.2em;">api.lendy.fr:27031/api/users/</span
 
  - **{POST} /register** :  
  
-       *envoi:*  
+       Envoi:  
          {  
-         "username": "String",  
-         "password": "String",  
-         "type": ["preteur", "emprunteur"]  
+           "username": "String",  
+           "password": "String",  
+           "type": ["preteur", "emprunteur"]  
          }  
 
-       *reception: (success: status 200)*  
+       Reception: (success: status 200)  
          {  
-         "token": "String",  
+           "token": "String"  
          }  
 
-       *reception: (failed: status 409)*  
+       Reception: (failed: status 409)  
          {  
-         "error" : "String"  
+           "error" : "String"  
          }  
