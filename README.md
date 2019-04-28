@@ -8,7 +8,7 @@ Base Url : <b><span style="font-size:1.2em;">api.lendy.fr:27031/api/users/</span
 # Routes
 
  - **{POST} /register** :  
-  *envoi: *  
+  *envoi:*  
 	{  
 	"username": "String",  
 	"password": "String",  
