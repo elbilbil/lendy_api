@@ -9,9 +9,9 @@ Base Url : <b><span style="font-size:1.2em;">api.lendy.fr:27031/api/users/</span
 
  - **{POST} /register** :  
     {	
-	"username": "String",
-	"password": "String",
-	"type": ["preteur", "emprunteur"]
-	}
+	"username": "String",  
+	"password": "String",  
+	"type": ["preteur", "emprunteur"]  
+	}  
 
  
