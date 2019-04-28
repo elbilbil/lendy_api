@@ -1,5 +1,0 @@
-yl_company_homepage:
-    path:     /
-    defaults: { _controller: YLCompanyBundle:Default:index }
-    methods:  [POST]
-    condition: "request.attributes.get('version') == 1.0"
