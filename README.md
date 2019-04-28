@@ -119,3 +119,89 @@ variable suivi de * sont des requires.
          {  
            "error" : "String"  
          }  
+
+- **{GET} /lenders** :  
+ 
+         *HEADER :  
+            Authorization : Bearer {token}  
+
+       Reception: (success: status 200)  
+         {  
+             "_id": "String",  
+             "username": "String",  
+             "password": "String",  
+             "type": "preteur, emprunteur",  
+             "role": "client",  
+             "status": "enabled",  
+             "__v": 0,  
+             "cars": "String",  
+             "location": {  
+                 "latitude": float,  
+                 "longitude": float  
+             },
+             "sex": "Homme, Femme, Autre",  
+             "createdAt": Date  
+         }  
+
+       Reception: (failed: status 40*)  
+         {  
+           "error" : "String"  
+         }  
+
+- **{GET} /drivers** :  
+ 
+         *HEADER :  
+            Authorization : Bearer {token}  
+
+       Reception: (success: status 200)  
+         {  
+             "_id": "String",  
+             "username": "String",  
+             "password": "String",  
+             "type": "preteur, emprunteur",  
+             "role": "client",  
+             "status": "enabled",  
+             "__v": 0,  
+             "cars": "String",  
+             "location": {  
+                 "latitude": float,  
+                 "longitude": float  
+             },
+             "sex": "Homme, Femme, Autre",  
+             "createdAt": Date  
+         }  
+
+       Reception: (failed: status 40*)  
+         {  
+           "error" : "String"  
+         }  
+
+- **{GET} /myself** :  
+ 
+         *HEADER :  
+            Authorization : Bearer {token}  
+
+       Reception: (success: status 200)  
+         {  
+             "_id": "String",  
+             "username": "String",  
+             "password": "String",  
+             "type": "preteur, emprunteur",  
+             "role": "client",  
+             "status": "enabled",  
+             "__v": 0,  
+             "cars": "String",  
+             "location": {  
+                 "latitude": float,  
+                 "longitude": float  
+             },
+             "sex": "Homme, Femme, Autre",  
+             "createdAt": Date  
+         }  
+
+       Reception: (failed: status 40*)  
+         {  
+           "error" : "String"  
+         }  
+         
+##Essayez sur postman les request !!
