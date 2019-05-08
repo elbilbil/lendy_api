@@ -129,9 +129,9 @@ class PicturesService {
         let _path;
 
         if (type)
-            _path = path.join(__dirname, '../../../static/images/' + type);
+            _path = path.join(__dirname, './static/images/' + type);
         else
-            _path = path.join(__dirname, '../../../static/images/');
+            _path = path.join(__dirname, './static/images/');
 
         return _path
     }

@@ -12,6 +12,8 @@ const UserService = require('./user.service');
 const UserModel = require('./user.model');
 const DiscussionModel = require('./discussion.model');
 const MessageModel = require('./message.model');
+var ObjectId = require('mongodb').ObjectID;
+
 
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
@@ -24,7 +26,6 @@ if (conf.mailgun.apiKey) {
 }
 
 const authenticate = function (req, res, next) {
-    console.log('Authentification');
     console.log(req.body);
     passport.authenticate('jwt', {
         session: false
@@ -39,9 +40,12 @@ router.get('/drivers', authenticate, getDrivers);
 router.get('/lenders', authenticate, getLenders);
 router.get('/cars', authenticate, getCars);
 router.get('/myself', authenticate, getMyself);
+router.get('/info', authenticate, getUserInfo);
 router.delete('/:id', authenticate, deleteUser);
 router.get('/message', authenticate, getDiscution);
 router.post('/message', authenticate, postMessage);
+router.get('/discussion', authenticate, getAllDiscution);
+router.get('/newDiscussion', authenticate, getAllNonViewedDiscution);
 
 function update(req, res) {
     let reqUser = req.user;
@@ -84,6 +88,16 @@ function login(req, res) {
         }, function (err) {
             res.status(400).json(err)
         })
+}
+
+function getUserInfo(req, res) {
+    let userId = req.query.userId;
+    UserModel.findById(userId, function (err, user) {
+        if (err) {
+            return res.status(409).json(err)
+        }
+        return res.status(200).json(user)
+    });
 }
 
 function register(req, res) {
@@ -157,11 +171,6 @@ function deleteUser(req, res) {
                 }, err => {
                     return res.status(400).json(err)
                 });
-            PicturesService.removeFile(user.qrcode, 'users')
-                .then(() => {
-                }, err => {
-                    return res.status(400).json(err)
-                });
             return res.status(200).json(user)
         }, function (err) {
             return res.status(400).json(err)
@@ -173,13 +182,21 @@ function getDrivers(req, res) {
     let reqUser = req.user;
     let mileToKmMultiplicator = 1.609;
     var defaultDistance = 100;
-    if (req.body.distance) {
-        defaultDistance = req.body.distance;
+    var defaultLatitude = reqUser.location.latitude;
+    var defaultLongitude = reqUser.location.longitude;
+
+    if (req.query.distance) {
+        defaultDistance = req.query.distance;
+    }
+    if (req.query.latitude) {
+        defaultLatitude = parseFloat(req.query.latitude.toString());
+    }
+    if (req.query.longitude) {
+        defaultLongitude = parseFloat(req.query.longitude.toString());
     }
     UserModel.find({type : 'emprunteur', role: 'client', status: 'enabled', location : {
-            $geoWithin: {$centerSphere: [[  reqUser.location.longitude,reqUser.location.latitude], defaultDistance * mileToKmMultiplicator / 3963.2 ]}
+            $geoWithin: {$centerSphere: [[defaultLongitude, defaultLatitude], defaultDistance * mileToKmMultiplicator / 3963.2 ]}
         }}, function(err, users) {
-        console.log(users.length);
         if (err) {
             return res.status(400).json(err)
         }
@@ -191,11 +208,27 @@ function getLenders(req, res) {
     let reqUser = req.user;
     let mileToKmMultiplicator = 1.609;
     var defaultDistance = 100;
-    if (req.body.distance) {
-        defaultDistance = req.body.distance;
+    var defaultLatitude = reqUser.location.latitude;
+    var defaultLongitude = reqUser.location.longitude;
+
+    console.log(defaultLongitude);
+    console.log(defaultLatitude);
+
+    if (req.query.distance) {
+        defaultDistance = req.query.distance;
     }
+    if (req.query.latitude) {
+        defaultLatitude = parseFloat(req.query.latitude.toString());
+    }
+    if (req.query.longitude) {
+        defaultLongitude = parseFloat(req.query.longitude.toString());
+    }
+
+    console.log(defaultLongitude);
+    console.log(defaultLatitude);
+
     UserModel.find({type : 'preteur', role: 'client', status: 'enabled', location : {
-            $geoWithin: {$centerSphere: [[  reqUser.location.longitude,reqUser.location.latitude], defaultDistance * mileToKmMultiplicator / 3963.2 ]}
+            $geoWithin: {$centerSphere: [[defaultLongitude ,defaultLatitude], defaultDistance * mileToKmMultiplicator / 3963.2 ]}
             }}, function(err, users) {
         if (err) {
             return res.status(400).json(err)
@@ -217,6 +250,44 @@ function getCars(req, res) {
         res.status(200).json(users)
     })
 }
+function getAllDiscution(req, res) {
+    let reqUser = req.user;
+    DiscussionModel.find({
+        members: {$all: [reqUser._id]}
+    }, async function (err, discussions) {
+        if (err) {
+            return res.status(400).json(err)
+        }
+        var newDiscussions = [];
+        discussions.forEach(function(discussion) {
+            var modifiedDiscussion = discussion;
+            modifiedDiscussion.messages = [discussion.messages[discussion.messages.length - 1]];
+            newDiscussions.push(modifiedDiscussion);
+        });
+        return res.status(200).json(newDiscussions)
+    }).populate('messages')
+}
+
+function getAllNonViewedDiscution(req, res) {
+    let reqUser = req.user;
+    DiscussionModel.find({
+        members: {$all: [reqUser._id]}
+    }, async function (err, discussions) {
+        if (err) {
+            return res.status(400).json(err)
+        }
+        var newDiscussions = [];
+        discussions.forEach(function(discussion) {
+            var modifiedDiscussion = discussion;
+            let lastMessage = discussion.messages[discussion.messages.length - 1];
+            if (lastMessage.refUser[0].toString() != reqUser._id.toString() && lastMessage.hasBeenViewed === false) {
+                modifiedDiscussion.messages = [discussion.messages[discussion.messages.length - 1]];
+                newDiscussions.push(modifiedDiscussion);
+            }
+        });
+        return res.status(200).json(newDiscussions)
+    }).populate('messages')
+}
 
 function getDiscution(req, res) {
     let reqUser = req.user;
@@ -226,18 +297,30 @@ function getDiscution(req, res) {
             return res.status(406).json("User to contact is not found")
         } else {
             DiscussionModel.find({
-                members:[reqUser._id, ...reqContacts]
+                $or: [ { members: [reqContacts[0],reqUser._id] },
+                       { members: [reqUser._id, reqContacts[0]]} ]
             }, async function (err, discussions) {
                 if (err) {
                     return res.status(400).json(err)
                 }
+                console.log(reqContacts[0], reqUser._id);
+                console.log(discussions.length);
                 if (discussions === undefined || discussions.length === 0) {
                     console.log("New");
                     return res.status(200).json([])
                 }
                 else {
                     console.log("Exist");
-                    return res.status(200).json(discussions[0].messages)
+                    let messages = discussions[0].messages;
+                    if (messages[messages.length - 1].refUser[0].toString() != reqUser._id.toString()) {
+                        discussions[0].messages[messages.length - 1].hasBeenViewed = true
+                    }
+                    discussions[0].messages[messages.length - 1].save(function(err, result) {
+                        if (err) {
+                            return res.status(400).json(err)
+                        }
+                        return res.status(200).json(messages)
+                    });
                 }
             }).populate('messages')
         }
@@ -253,14 +336,15 @@ function postMessage(req, res) {
             return res.status(406).json("User to contact is not found")
         } else {
             DiscussionModel.find({
-                members: [reqUser._id, ...reqContacts]
+                $or: [ { members: [reqContacts[0],reqUser._id] },
+                    { members: [reqUser._id, reqContacts[0]]} ]
             }, function (err, disscussions) {
                 if (err) {
                     return res.status(400).json(err)
                 }
                 if (disscussions === undefined || disscussions.length === 0) {
+                    let message = new MessageModel({message:reqMessage, refUser: [reqUser._id]});
                     console.log("New");
-                    let message = new MessageModel({message:reqMessage, refUser: reqUser._id});
                     message.save(function (err, result) {
                         if (err) {
                             return res.status(400).json(err)
@@ -275,13 +359,13 @@ function postMessage(req, res) {
                     });
                 }
                 else {
+                    let message = new MessageModel({message:reqMessage, refUser: [reqUser._id]});
                     console.log("Exist");
-                    let message = new MessageModel({message:reqMessage, refUser: reqUser._id});
                     message.save(function (err, result) {
                         if (err) {
                             return res.status(400).json(err)
                         }
-                        disscussions[0].messages.push(message);
+                        disscussions[0].messages = disscussions[0].messages.concat([result]);
                         disscussions[0].save(function(err, result) {
                             if (err) {
                                 return res.status(400).json(err)

@@ -8,4 +8,8 @@ const discussionSchema = mongoose.Schema({
     members: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 
+discussionSchema.virtual('lastMessage').get(function () {
+    console.log(this.messages)
+});
+
 module.exports = mongoose.model('Discussion', discussionSchema);

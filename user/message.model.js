@@ -1,13 +1,21 @@
 const mongoose = require('mongoose');
 
 const messageSchema = mongoose.Schema({
-    message : String,
+    message : {
+        type : String,
+        required: true
+    },
     createdAt: {
         type: Date,
         default: Date.now
     },
     refUser: {
-        type: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+        default: []
+    },
+    hasBeenViewed : {
+        type : Boolean,
+        default: false
     }
 });
 

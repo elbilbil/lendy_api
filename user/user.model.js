@@ -19,6 +19,12 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    adTitle: {
+        type: String
+    },
+    adDescription: {
+        type: String
+    },
     type: {
         type: String,
         required:true,
@@ -60,7 +66,13 @@ const userSchema = mongoose.Schema({
     picture: String,
     qrcode: String,
     numPhone: String,
-    age: String
+    city: String,
+    adresse: String,
+    age: String,
+    lastConnection: {
+        type: Date,
+        default: Date.now
+    }
 }, {
     strict: false
 });

@@ -127,14 +127,13 @@ class UserService {
         })
     }
 
-
     savePicture(userData) {
         return new Promise(function (resolve, reject) {
             if (!userData.picture)
                 resolve();
             else {
                 let filename = 'img-' + new Date().getTime();
-                let destpath = path.join(__dirname, '../../../static/images/users');
+                let destpath = path.join(__dirname, './static/images/users');
                 base64Img.img(userData.picture, destpath, filename, function (err, filepath) {
                     if (err)
                         resolve();
@@ -150,7 +149,7 @@ class UserService {
         return new Promise(function(resolve, reject) {
             if (userData.picture.length === 0)
                 resolve();
-            let url = path.join(__dirname, '../../../static/images/users/')+ userData.picture;
+            let url = path.join(__dirname, './static/images/users/')+ userData.picture;
             fs.readFile(url, function(err, data) {
                 resolve(data.toString('base64'));
             })
@@ -160,7 +159,7 @@ class UserService {
     generateQrcode(id) {
         return new Promise(function (resolve, reject) {
             let filename = 'qrcode-' + new Date().getTime();
-            let destpath = path.join(__dirname, '../../../static/images/users');
+            let destpath = path.join(__dirname, './static/images/users');
             QRCode.toFile(destpath + '/' + filename + '.png', "user" + id, function (err) {
                 if (err) reject(console.log('err'));
                 resolve(filename + '.png')
