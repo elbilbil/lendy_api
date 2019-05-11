@@ -13,6 +13,7 @@ const UserModel = require('./user.model');
 const DiscussionModel = require('./discussion.model');
 const MessageModel = require('./message.model');
 var ObjectId = require('mongodb').ObjectID;
+var PicturesService = require('../utilities/pictures.service');
 
 
 const ExtractJwt = require('passport-jwt').ExtractJwt;
