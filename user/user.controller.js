@@ -107,7 +107,8 @@ function register(req, res) {
     console.log(userData);
     if (!userData.username)
         userData.username = userData.email;
-    userData.username = userData.username.trim();
+    if (userData.username)
+        userData.username = userData.username.trim();
     if (!UserService.isEmailValid(userData.username)) {
         return res.status(409).json('email_client_invalid');
     }

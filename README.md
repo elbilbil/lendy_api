@@ -5,6 +5,20 @@
 Api pour le projet Lendy EIP Epitech.  
 Base Url : <b><span style="font-size:1.2em;">api.lendy.fr:27031/api/users/</span></b>
 
+Directive de lancement le serveur :
+
+// Lancement de la base de donnée MongoDb en background
+
+sudo mongod &
+
+// Installation des modules open sources utiliser par le projet
+
+npm install
+
+// Lancement du serveur
+
+node app.js
+
 # Routes
 variable suivi de * sont des requires.  
 
