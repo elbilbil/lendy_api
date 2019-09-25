@@ -11,10 +11,10 @@ const router = express.Router();
 const UserService = require('./user.service');
 const UserModel = require('./user.model');
 const DiscussionModel = require('./discussion.model');
+const ReservationModel = require('./reservation.model');
 const MessageModel = require('./message.model');
 var ObjectId = require('mongodb').ObjectID;
 var PicturesService = require('../utilities/pictures.service');
-
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 let mailgun;
@@ -48,6 +48,8 @@ router.post('/message', authenticate, postMessage);
 router.get('/discussion', authenticate, getAllDiscution);
 router.get('/newDiscussion', authenticate, getAllNonViewedDiscution);
 router.post('/rate', authenticate, addRating);
+router.post('/reservation', authenticate, addReservation);
+router.patch('/reservation', authenticate, updateReservationStatus);
 
 function update(req, res) {
     let reqUser = req.user;
@@ -241,7 +243,12 @@ function getLenders(req, res) {
 }
 
 function getMyself(req, res) {
-    return res.json(req.user)
+    UserModel.findById(req.user._id, function(err, users) {
+        if (err) {
+            return res.status(400).json(err)
+        }
+        res.status(200).json(users)
+    }).populate("reservations")
 }
 
 function getCars(req, res) {
@@ -338,22 +345,64 @@ function addRating(req, res) {
     let message = req.body.message;
     let rate = req.body.rate;
 
-    UserService.getUsersIdExist([userRated]).then(function (isUsersExistent) {
+    UserService.getUsersIdExist([userRatedId]).then(function (isUsersExistent) {
         if (!isUsersExistent) {
             return res.status(406).json("User to contact is not found")
         } else {
-            UserModel.findById({ userRatedId }, function (err, users) {
+            UserModel.find({ _id : userRatedId }, function (err, users) {
                 if (err) { return res.status(400).json(err) }
                 if (users === undefined || users.length === 0) { return res.status(400).json("Users error") }
                 let user = users[0];
-                user.ratings.append({ username : reqUser.fullName, message : message, rate : rate, image : reqUser.picture });
-                user.save(function(err, resudlt) {
+                user.ratings = [ ...user.ratings, { username : reqUser.fullName, message : message, rate : rate, image : reqUser.picture }];
+                user.save(function(err, result) {
                     if (err) { return res.status(400).json(err) }
                     return res.status(200).json("Successfully added the new rating")
                 })
             })
         }
     })
+}
+
+function addReservation(req, res) {
+    let reqUser = req.user;
+    let userRequestedId = req.body.user;
+    let sinceDate = new Date(req.body.since);
+    let toDate = new Date(req.body.to);
+    let place = req.body.place;
+    let time = new Date(req.body.time);
+
+    UserService.getUsersIdExist([userRequestedId]).then(function (isUsersExistent) {
+        if (!isUsersExistent) {
+            return res.status(406).json("User to contact is not found")
+        } else {
+            UserModel.find({ _id : userRequestedId }, function (err, users) {
+                if (err) { return res.status(400).json(err) }
+                if (users === undefined || users.length === 0) { return res.status(400).json("Users error") }
+                let user = users[0];
+                const newReservation = new ReservationModel({ since : sinceDate, to : toDate, state : "PENDING", meetingPlace : place, meetingTime : time, members : [reqUser._id, userRequestedId] })
+                newReservation.save(function(err, reservation) {
+                    if (err) { return res.status(400).json(err) }
+                    reqUser.reservations = [...reqUser.reservations, newReservation];
+                    user.reservations = [...user.reservations, newReservation];
+                    reqUser.save(function(err, result) {
+                        if (err) { return res.status(400).json(err) }
+                        user.save(function(err, result) {
+                            if (err) { return res.status(400).json(err) }
+                            return res.status(200).json("Successfully asked new reservation")
+                        })
+                    });
+                });
+            })
+        }
+    })
+}
+
+function updateReservationStatus(req, res) {
+    let reqUser = req.user;
+    let reservationId = req.body.reservationId;
+    let newStatus = req.body.newStatus;
+
+
 }
 
 function postMessage(req, res) {

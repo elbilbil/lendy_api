@@ -64,9 +64,25 @@ const userSchema = mongoose.Schema({
         }],
         default : [ { username : "Paul Heyraud", message : "Excellent efficace et courtois je recommande", rate : 4, image : "" } ]
     },
-    cars : {
-        type: String,
-        default: 'Golden Proust'
+    reservations : {
+        type : [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+        default : []
+    },
+    car : {
+        type: {
+            model : String,
+            types : String,
+            transmission : String,
+            km : Number,
+            picture : String
+        },
+        default : {
+            model : "Cliot 4",
+            types : "Citadine",
+            transmission : "Automatique",
+            km : 70000,
+            picture : "https://www.largus.fr/images/images/lamborghini-urus-01.jpg?width=612&quality=80"
+        }
     },
     defaultPassword: String,
     email: String,
