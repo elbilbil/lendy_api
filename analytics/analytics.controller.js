@@ -138,11 +138,15 @@ return res.status(200).json({ contracts : 3 })
 function getAllUserLocation(rew, res) {
 UserModel.find({ role : 'client', status : 'enabled'}, function (err, users) {
     if (err) return res.status(403).json(err);
-    let usersLocation = [];
+    let usersPreteurLocation = [];
+    let usersEmPreteurLocation = [];
+
     for (let user in users) {
-        usersLocation.push(user.location)
+        if (user.type === 'preteur') {
+            usersPreteurLocation.push(user.location)
+        } else { usersEmPreteurLocation.push(user.location) }
     }
-    return res.status(200).json(usersLocation);
+    return res.status(200).json({ preteur : usersPreteurLocation, empreteur : usersEmPreteurLocation} );
 })
 }
 module.exports = router;
