@@ -47,9 +47,10 @@ const userSchema = mongoose.Schema({
     location: {
         type: {
             latitude : Number,
-            longitude : Number
+            longitude : Number,
+            address : String
         },
-        default: {latitude : 43.311360, longitude : 5.370490},
+        default: {latitude : 43.311360, longitude : 5.370490, address : "Rue Mirès 13003 Marseille"},
         index: {
             type: '2dsphere',
             sparse: true

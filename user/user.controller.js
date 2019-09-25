@@ -48,6 +48,7 @@ router.post('/message', authenticate, postMessage);
 router.get('/discussion', authenticate, getAllDiscution);
 router.get('/newDiscussion', authenticate, getAllNonViewedDiscution);
 router.post('/rate', authenticate, addRating);
+router.get('/reservation', authenticate, getAllReservation);
 router.post('/reservation', authenticate, addReservation);
 router.patch('/reservation', authenticate, updateReservationStatus);
 
@@ -84,6 +85,7 @@ function update(req, res) {
 }
 
 function login(req, res) {
+    console.log(req.body);
     UserService.login(req.body.username, req.body.password)
         .then(function (token) {
             res.json({
@@ -243,16 +245,15 @@ function getLenders(req, res) {
 }
 
 function getMyself(req, res) {
-    UserModel.findById(req.user._id, function(err, users) {
+    UserModel.findById(req.user._id, async function(err, users) {
         if (err) {
             return res.status(400).json(err)
         }
         res.status(200).json(users)
-    }).populate("reservations")
+    })//.populate("reservations")
 }
 
 function getCars(req, res) {
-    let reqUser = req.user;
     UserModel.find({type : 'preteur', role: 'client', status: 'enabled' }, function(err, users) {
         if (err) {
             return res.status(400).json(err)
@@ -260,6 +261,7 @@ function getCars(req, res) {
         res.status(200).json(users)
     })
 }
+
 function getAllDiscution(req, res) {
     let reqUser = req.user;
     DiscussionModel.find({
@@ -366,10 +368,10 @@ function addRating(req, res) {
 function addReservation(req, res) {
     let reqUser = req.user;
     let userRequestedId = req.body.user;
-    let sinceDate = new Date(req.body.since);
-    let toDate = new Date(req.body.to);
+    let sinceDate = req.body.since;
+    let toDate = req.body.to;
     let place = req.body.place;
-    let time = new Date(req.body.time);
+    let time = req.body.time;
 
     UserService.getUsersIdExist([userRequestedId]).then(function (isUsersExistent) {
         if (!isUsersExistent) {
@@ -397,11 +399,30 @@ function addReservation(req, res) {
     })
 }
 
+function getAllReservation(req, res) {
+    ReservationModel.find({
+        _id : {$in:req.user.reservations}
+    }, function(err, reservations) {
+        console.log(err);
+        if (err) { return res.status(400).json(err)}
+        return res.status(200).json(reservations)
+    }).populate("members")
+}
+
 function updateReservationStatus(req, res) {
-    let reqUser = req.user;
     let reservationId = req.body.reservationId;
     let newStatus = req.body.newStatus;
 
+    ReservationModel.find({ _id : reservationId}, function(err, reservations) {
+        if (err) { return res.status(400).json(err)}
+        const reservation = reservations[0];
+        reservation.state = newStatus;
+        console.log(reservation.isValidating);
+        if (newStatus === "PASSED" && reservation.isValidating === undefined) {
+            reservation.state = "NOW";
+            reservation.isValidating = req.user._id
+        }
+    })
 
 }
 

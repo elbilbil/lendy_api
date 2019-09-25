@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const reservationSchema = mongoose.Schema({
     since : {
-        type : Date,
+        type : Number,
         required: true
     },
     to : {
-        type : Date,
+        type : Number,
         required: true
     },
     createdAt: {
@@ -24,15 +24,19 @@ const reservationSchema = mongoose.Schema({
         required: true
     },
     meetingPlace : {
-        type : String,
-        required: true
+        type: {
+            latitude : Number,
+            longitude : Number,
+            address : String
+        },
+        default: {latitude : 43.311360, longitude : 5.370490, address : "Rue Mirès 13003 Marseille"},
     },
     meetingTime : {
-        type : Date,
+        type : Number,
         required: true
     },
     isValidating : {
-
+        type: { type : mongoose.Schema.Types.ObjectId, ref: 'User' },
     }
 });
 

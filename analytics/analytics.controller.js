@@ -69,30 +69,22 @@ if (allowedRoles.indexOf(req.user.role) < 0)
         requesterRole: req.user.role
     });*/
 
-let reqContacts = req.params.usersId;
-UserService.getUsersIdExist(reqContacts).then(function (isUsersExistent) {
-    if (!isUsersExistent) {
-        return res.status(406).json("User to contact is not found")
-    } else {
-        DiscussionModel.find({
-            $or: [ { members: [reqContacts[0], reqContacts[1]] },
-                { members: [reqContacts[1], reqContacts[0]]} ]
-        }, async function (err, discussions) {
-            if (err) {
-                return res.status(400).json(err)
-            }
-            console.log(discussions.length);
-            if (discussions === undefined || discussions.length === 0) {
-                console.log("New");
-                return res.status(200).json({ messages : 0 })
-            }
-            else {
-                console.log("Exist");
-                return res.status(200).json( { messages : discussions[0].messages.length })
-            }
-        })
-    }
-});
+    let reqContacts = req.params.usersId;
+    const search = (reqContacts === undefined) ? {} : { $or: [ { members: [reqContacts[0], reqContacts[1]] },  { members: [reqContacts[1], reqContacts[0]]} ] };
+    DiscussionModel.find(search, async function (err, discussions) {
+        if (err) {
+            return res.status(400).json(err)
+        }
+        console.log(discussions.length);
+        if (discussions === undefined || discussions.length === 0) {
+            console.log("New");
+            return res.status(200).json({ messages : 0 })
+        }
+        else {
+            console.log("Exist");
+            return res.status(200).json( { messages : discussions[0].messages.length })
+        }
+    })
 }
 
 function getNumbersRun(req, res) {
@@ -146,7 +138,7 @@ UserModel.find({ role : 'client', status : 'enabled'}, function (err, users) {
             usersPreteurLocation.push(user.location)
         } else { usersEmPreteurLocation.push(user.location) }
     }
-    return res.status(200).json({ preteur : usersPreteurLocation, empreteur : usersEmPreteurLocation} );
+    return res.status(200).json({ preteur : usersPreteurLocation, emprunteur : usersEmPreteurLocation} );
 })
 }
 module.exports = router;

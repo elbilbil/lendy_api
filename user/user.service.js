@@ -47,6 +47,7 @@ class UserService {
 
     login(username, password) {
         username = username.trim();
+        console.log(this.encrypt(password))
         return new Promise((resolve, reject) => {
             Model.findOne({
                 username: username,
