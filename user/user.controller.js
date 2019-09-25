@@ -15,10 +15,10 @@ const MessageModel = require('./message.model');
 var ObjectId = require('mongodb').ObjectID;
 var PicturesService = require('../utilities/pictures.service');
 
-
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 let mailgun;
+
 if (conf.mailgun.apiKey) {
     mailgun = require('mailgun-js')({
         apiKey: conf.mailgun.apiKey,
@@ -47,6 +47,7 @@ router.get('/message', authenticate, getDiscution);
 router.post('/message', authenticate, postMessage);
 router.get('/discussion', authenticate, getAllDiscution);
 router.get('/newDiscussion', authenticate, getAllNonViewedDiscution);
+router.post('/rate', authenticate, addRating);
 
 function update(req, res) {
     let reqUser = req.user;
@@ -266,7 +267,9 @@ function getAllDiscution(req, res) {
             newDiscussions.push(modifiedDiscussion);
         });
         return res.status(200).json(newDiscussions)
-    }).populate('messages')
+    })
+        .populate('messages')
+        .populate('members')
 }
 
 function getAllNonViewedDiscution(req, res) {
@@ -326,6 +329,30 @@ function getDiscution(req, res) {
             }).populate('messages')
         }
     });
+}
+
+function addRating(req, res) {
+     let reqUser = req.user;
+     let userRatedId = req.body.user;
+    let message = req.body.message;
+    let rate = req.body.rate;
+
+    UserService.getUsersIdExist([userRated]).then(function (isUsersExistent) {
+        if (!isUsersExistent) {
+            return res.status(406).json("User to contact is not found")
+        } else {
+            UserModel.findById({ userRatedId }, function (err, users) {
+                if (err) { return res.status(400).json(err) }
+                if (users === undefined || users.length === 0) { return res.status(400).json("Users error") }
+                let user = users[0];
+                user.ratings.append({ username : reqUser.fullName, message : message, rate : rate, image : reqUser.picture });
+                user.save(function(err, resudlt) {
+                    if (err) { return res.status(400).json(err) }
+                    return res.status(200).json("Successfully added the new rating")
+                })
+            })
+        }
+    })
 }
 
 function postMessage(req, res) {

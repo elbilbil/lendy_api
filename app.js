@@ -66,6 +66,7 @@ app.get('/', function (req, res) {
 
 //Controllers
 app.use('/api/users', require('./user/user.controller'));
+app.use('/api/analytics', require('./analytics/analytics.controller'));
 
 app.listen(conf.port, function () {
     console.log('Lendy listening on port ' + conf.port)

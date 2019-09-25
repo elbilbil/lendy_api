@@ -55,6 +55,15 @@ const userSchema = mongoose.Schema({
             sparse: true
         }
     },
+    ratings : {
+        type : [{
+            username : String,
+            message  : String,
+            image    : String,
+            rate     : Number
+        }],
+        default : [ { username : "Paul Heyraud", message : "Excellent efficace et courtois je recommande", rate : 4, image : "" } ]
+    },
     cars : {
         type: String,
         default: 'Golden Proust'
@@ -77,6 +86,19 @@ const userSchema = mongoose.Schema({
     strict: false
 });
 
+userSchema.virtual('rating').get(function () {
+    var finalRate = 0;
+    this.ratings.forEach(rating => {
+        finalRate += rating.rate
+    });
+    finalRate = (this.ratings.length > 0) ? (finalRate / this.ratings.length) : 0;
+    return finalRate
+});
+
+userSchema.virtual('fullName').get(function () {
+    return this.lastname + " " + this.firstname
+});
+
 userSchema.index({
     username: 'text',
     firstname: 'text',
@@ -88,6 +110,10 @@ userSchema.pre('save', function (next) {
     let UserService = require('./user.service');
     this.password = UserService.encrypt(this.password);
     next()
+});
+
+userSchema.set('toJSON', {
+    virtuals: true
 });
 
 userSchema.plugin(uniqueValidator);
