@@ -14,7 +14,7 @@ const reservationSchema = mongoose.Schema({
         default: Date.now
     },
     members: {
-        type: [{ type : [mongoose.Schema.Types.ObjectId], ref: 'User' }],
+        type: [{ type : [mongoose.Schema.Types.ObjectId]}],
         required: true
     },
     state : {
