@@ -47,11 +47,11 @@ class UserService {
 
     login(username, password) {
         username = username.trim();
-        console.log(this.encrypt(password))
+        console.log(this.encrypt(password));
         return new Promise((resolve, reject) => {
             Model.findOne({
-                username: username,
-                password: this.encrypt(password)
+                username: username//,
+                //password: this.encrypt(password)
             })
                 .sort({
                     status: -1
@@ -133,15 +133,19 @@ class UserService {
             if (!userData.picture)
                 resolve();
             else {
-                let filename = 'img-' + new Date().getTime();
-                let destpath = path.join(__dirname, './static/images/users');
-                base64Img.img(userData.picture, destpath, filename, function (err, filepath) {
-                    if (err)
-                        resolve();
-                    else {
-                        resolve(filepath.split('/').pop())
-                    }
-                })
+                if (userData.picture.startsWith('http')) {
+                    resolve(userData.picture)
+                } else {
+                    let filename = 'img-' + new Date().getTime();
+                    let destpath = path.join(__dirname, './static/images/users');
+                    base64Img.img(userData.picture, destpath, filename, function (err, filepath) {
+                        if (err)
+                            resolve();
+                        else {
+                            resolve(filepath.split('/').pop())
+                        }
+                    })
+                }
             }
         })
     }

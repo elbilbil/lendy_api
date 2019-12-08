@@ -19,6 +19,12 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    since : {
+        type : Number,
+    },
+    to : {
+        type : Number,
+    },
     adTitle: {
         type: String
     },
@@ -66,7 +72,7 @@ const userSchema = mongoose.Schema({
         default : [ { username : "Paul Heyraud", message : "Excellent efficace et courtois je recommande", rate : 4, image : "" } ]
     },
     reservations : {
-        type : [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+        type : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reservation' }],
         default : []
     },
     car : {
@@ -110,6 +116,15 @@ userSchema.virtual('rating').get(function () {
     });
     finalRate = (this.ratings.length > 0) ? (finalRate / this.ratings.length) : 0;
     return finalRate
+});
+
+userSchema.virtual('isCarUsed').get(function () {
+    for (let i = 0; i < this.reservations.length; i++) {
+        if (this.reservations[i].state === "NOW") {
+            return true
+        }
+    }
+    return false
 });
 
 userSchema.virtual('fullName').get(function () {

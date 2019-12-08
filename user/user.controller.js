@@ -13,6 +13,7 @@ const UserModel = require('./user.model');
 const DiscussionModel = require('./discussion.model');
 const ReservationModel = require('./reservation.model');
 const MessageModel = require('./message.model');
+const CourseModel = require('./course.model');
 var ObjectId = require('mongodb').ObjectID;
 var PicturesService = require('../utilities/pictures.service');
 const ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -51,6 +52,11 @@ router.post('/rate', authenticate, addRating);
 router.get('/reservation', authenticate, getAllReservation);
 router.post('/reservation', authenticate, addReservation);
 router.patch('/reservation', authenticate, updateReservationStatus);
+router.patch('/signature', authenticate, addSignature);
+router.post('/comments', authenticate, commentResa);
+router.post('/course', authenticate, addCourse);
+router.patch('/course', authenticate, updateCourse);
+router.get('/course', authenticate, getCourse);
 
 function update(req, res) {
     let reqUser = req.user;
@@ -62,6 +68,7 @@ function update(req, res) {
             else {
                 UserService.savePicture(doc)
                     .then(function (filename) {
+                        console.log(filename);
                         if (filename) {
                             doc.picture = filename;
                             PicturesService.removeFile(reqUser.picture, 'users')
@@ -72,6 +79,7 @@ function update(req, res) {
                         }
                         if (doc.password)
                             doc.password = UserService.encrypt(doc.password);
+                        console.log(doc);
                         UserModel.findByIdAndUpdate(reqUser.id, doc, {
                             new: true
                         }, function (err, result) {
@@ -85,7 +93,6 @@ function update(req, res) {
 }
 
 function login(req, res) {
-    console.log(req.body);
     UserService.login(req.body.username, req.body.password)
         .then(function (token) {
             res.json({
@@ -201,9 +208,9 @@ function getDrivers(req, res) {
     if (req.query.longitude) {
         defaultLongitude = parseFloat(req.query.longitude.toString());
     }
-    UserModel.find({type : 'emprunteur', role: 'client', status: 'enabled', location : {
+    UserModel.find({type : 'emprunteur', role: 'client', status: 'enabled'/*, location : {
             $geoWithin: {$centerSphere: [[defaultLongitude, defaultLatitude], defaultDistance * mileToKmMultiplicator / 3963.2 ]}
-        }}, function(err, users) {
+        }*/ }, function(err, users) {
         if (err) {
             return res.status(400).json(err)
         }
@@ -214,7 +221,7 @@ function getDrivers(req, res) {
 function getLenders(req, res) {
     let reqUser = req.user;
     let mileToKmMultiplicator = 1.609;
-    var defaultDistance = 100;
+    var defaultDistance = 600;
     var defaultLatitude = reqUser.location.latitude;
     var defaultLongitude = reqUser.location.longitude;
 
@@ -234,9 +241,9 @@ function getLenders(req, res) {
     console.log(defaultLongitude);
     console.log(defaultLatitude);
 
-    UserModel.find({type : 'preteur', role: 'client', status: 'enabled', location : {
+    UserModel.find({type : 'preteur', role: 'client', status: 'enabled'/*, location : {
             $geoWithin: {$centerSphere: [[defaultLongitude ,defaultLatitude], defaultDistance * mileToKmMultiplicator / 3963.2 ]}
-            }}, function(err, users) {
+            }*/}, function(err, users) {
         if (err) {
             return res.status(400).json(err)
         }
@@ -250,7 +257,7 @@ function getMyself(req, res) {
             return res.status(400).json(err)
         }
         res.status(200).json(users)
-    })//.populate("reservations")
+    }).populate("reservations")
 }
 
 function getCars(req, res) {
@@ -401,12 +408,29 @@ function addReservation(req, res) {
 
 function getAllReservation(req, res) {
     ReservationModel.find({
-        _id : {$in:req.user.reservations}
     }, function(err, reservations) {
-        console.log(err);
         if (err) { return res.status(400).json(err)}
         return res.status(200).json(reservations)
     }).populate("members")
+}
+
+function addSignature(req, res) {
+    let reservationId = req.body.resaId;
+    let signature = req.body.signature;
+
+    ReservationModel.find({_id : reservationId}, function(err, reservations) {
+        if (err) { return res.status(400).json(err)}
+        let reservation = reservations[0];
+        UserService.savePicture({picture : signature})
+            .then(function (filename) {
+                reservation.signatures = [...reservation.signatures, {userId: req.user._id, signature: filename}]
+                reservation.save(function (err, resa) {
+                    if (err) { return res.status(400).json(err)}
+                    return res.status(200).json(resa)
+                })
+            })
+
+    })
 }
 
 function updateReservationStatus(req, res) {
@@ -418,18 +442,22 @@ function updateReservationStatus(req, res) {
         const reservation = reservations[0];
         reservation.state = newStatus;
         console.log(reservation.isValidating);
-        if (newStatus === "PASSED" && reservation.isValidating === undefined) {
-            reservation.state = "NOW";
+        if (newStatus === "NOW" && reservation.isValidating === undefined) {
+            reservation.state = "PENDING";
             reservation.isValidating = req.user._id
         }
+        reservation.save(function(err, resa) {
+            if (err) { return res.status(400).json(err)}
+            return res.status(200).json(resa)
+        })
     })
-
 }
 
 function postMessage(req, res) {
     let reqUser = req.user;
     let reqContacts = [req.body.contacts];
     let reqMessage = req.body.message;
+
     UserService.getUsersIdExist(reqContacts).then(function (isUsersExistent) {
         if (!isUsersExistent) {
             return res.status(406).json("User to contact is not found")
@@ -476,6 +504,61 @@ function postMessage(req, res) {
             })
         }
     });
+}
+
+function commentResa(req, res) {
+    let reservationId = req.body.resaId;
+    let comment = req.body.message;
+
+    ReservationModel.find({ _id : reservationId }, function(err, reservations) {
+        if (err) { return res.status(400).json(err) }
+        console.log(reservations);
+        const reservation = reservations[0];
+        reservation.comments = [...reservation.comments, { userId : req.user._id, message : comment }];
+        reservation.save(function(err, result) {
+            if (err) { return res.status(400).json(err) }
+            return res.status(200).json(result)
+        })
+    })
+}
+
+function addCourse(req, res) {
+    let courseTime = req.body.time;
+    let meetingPlace = req.body.place;
+
+    let newCourse = new CourseModel({members: [req.user._id], state : 'PENDING', meetingPlace: meetingPlace, meetingTime: courseTime});
+    newCourse.save(function (err, result) {
+        if (err) { return res.status(400).json(err) }
+        return res.status(200).json(result)
+    })
+}
+
+function updateCourse(req, res) {
+    let courseId = req.body.courseId;
+    let status = req.body.status;
+
+    CourseModel.find({_id : courseId}, function(err, courses) {
+        if (err) { return res.status(400).json(err) }
+        let course = courses[0];
+        if (course.state === "NOW") {
+            if (course.members.indexOf(req.user._id) === -1) {
+                if (err) { return res.status(400).json("Already Taken") }
+            }
+        }
+        course.members = [...course.members, req.user._id];
+        course.state = status;
+        course.save(function(err, result) {
+            if (err) { return res.status(400).json(err) }
+            return res.status(200).json(result)
+        })
+    })
+}
+
+function getCourse(req, res) {
+    CourseModel.find({state : 'PENDING'}, function(err, courses) {
+        if (err) { return res.status(400).json(err) }
+        return res.status(200).json(courses)
+    }).populate('members')
 }
 
 module.exports = router;

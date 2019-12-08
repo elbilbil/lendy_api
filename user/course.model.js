@@ -1,14 +1,6 @@
 const mongoose = require('mongoose');
 
-const reservationSchema = mongoose.Schema({
-    since : {
-        type : Number,
-        required: true
-    },
-    to : {
-        type : Number,
-        required: true
-    },
+const courseSchema = mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
@@ -34,20 +26,7 @@ const reservationSchema = mongoose.Schema({
     meetingTime : {
         type : Number,
         required: true
-    },
-    isValidating : {
-        type: { type : mongoose.Schema.Types.ObjectId, ref: 'User' },
-    },
-    comments : {
-        type : [{
-            userId :  { type : mongoose.Schema.Types.ObjectId, ref: 'User' },
-            message : String
-        }]
-    },
-    signatures : {
-        type : [{ userId : mongoose.Schema.Types.ObjectId, ref: 'User', image : String}],
-        default : []
     }
 });
 
-module.exports = mongoose.model('Reservation', reservationSchema);
+module.exports = mongoose.model('Course', courseSchema);
