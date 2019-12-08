@@ -53,9 +53,6 @@ class UserService {
                 username: username//,
                 //password: this.encrypt(password)
             })
-                .sort({
-                    status: -1
-                })
                 .exec(function (err, user) {
                     if (err)
                         return reject(err);
