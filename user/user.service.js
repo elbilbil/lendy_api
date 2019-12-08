@@ -52,16 +52,17 @@ class UserService {
             Model.findOne({
                 username: username//,
                 //password: this.encrypt(password)
-            })
-                .exec(function (err, user) {
-                    console.log(user)
-                    console.log(err)
+            }).exec(function (err, user) {
+                console.log('1')
                     if (err)
                         return reject(err);
+                console.log('2')
                     if (!user)
                         return reject('emailPawssordInvalid');
+                console.log('3')
                     if (user && (user.role == 'client' && user.status != 'enabled'))
                         return reject('player_not_enabled');
+                console.log('4')
                     let token = jwt.sign({
                         id: user.id
                     }, conf.secret);
