@@ -54,6 +54,8 @@ class UserService {
                 //password: this.encrypt(password)
             })
                 .exec(function (err, user) {
+                    console.log(user)
+                    console.log(err)
                     if (err)
                         return reject(err);
                     if (!user)
