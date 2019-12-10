@@ -57,6 +57,7 @@ router.post('/comments', authenticate, commentResa);
 router.post('/course', authenticate, addCourse);
 router.patch('/course', authenticate, updateCourse);
 router.get('/course', authenticate, getCourse);
+router.get('/user_course', authenticate, getUserCourse);
 
 function update(req, res) {
     let reqUser = req.user;
@@ -559,6 +560,14 @@ function getCourse(req, res) {
         if (err) { return res.status(400).json(err) }
         return res.status(200).json(courses)
     }).populate('members')
+}
+
+function getUserCourse(req, res) {
+    let userId =  req.query.userId;
+    CourseModel.find({ members: [userId]}, function(err, courses) {
+        if (err) { return res.status(400).json(err) }
+        return courses
+    })
 }
 
 module.exports = router;

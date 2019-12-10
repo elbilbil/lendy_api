@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9874d736-928e-4894-ba07-c4e9acda6e5f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/user/reservation.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/user/reservation.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/user/user.controller.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -51,16 +52,16 @@
     <session id="1688427112">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="20" />
+          <entry key="project.closed" value="21" />
           <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.2" value="4" />
-          <entry key="project.open.time.3" value="2" />
+          <entry key="project.open.time.3" value="3" />
           <entry key="project.open.time.4" value="6" />
           <entry key="project.open.time.5" value="3" />
           <entry key="project.open.time.6" value="2" />
-          <entry key="project.opened" value="24" />
+          <entry key="project.opened" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -75,23 +76,23 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="6971" />
+          <entry key="js" value="7163" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="6971" />
+          <entry key="JavaScript" value="7163" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user/reservation.model.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+            <state relative-caret-position="1104">
+              <caret line="46" selection-start-line="46" selection-end-line="49" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -99,17 +100,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user/user.model.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1704">
-              <caret line="71" column="99" selection-start-line="71" selection-start-column="96" selection-end-line="71" selection-end-column="99" />
+            <state relative-caret-position="521">
+              <caret line="76" column="6" lean-forward="true" selection-start-line="73" selection-start-column="4" selection-end-line="76" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/user/user.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="438">
-              <caret line="95" column="19" lean-forward="true" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
+            <state relative-caret-position="630">
+              <caret line="566" column="39" selection-start-line="566" selection-start-column="39" selection-end-line="566" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -117,8 +118,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user/course.model.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="744">
-              <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
+            <state relative-caret-position="168">
+              <caret line="7" column="11" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -126,7 +127,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user/user.service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
+            <state relative-caret-position="1392">
               <caret line="58" column="30" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
             </state>
           </provider>
@@ -145,7 +146,7 @@
         <entry file="file://$PROJECT_DIR$/user/discussion.model.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="5" column="19" lean-forward="true" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -154,7 +155,7 @@
         <entry file="file://$PROJECT_DIR$/conf.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
-              <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+              <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -162,7 +163,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-244">
+            <state relative-caret-position="624">
               <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
             </state>
           </provider>
@@ -191,8 +192,8 @@
       <find>reserva</find>
       <find>406</find>
       <find>com</find>
-      <find>getC</find>
       <find>ref</find>
+      <find>getC</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -206,10 +207,10 @@
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/analytics/analytics.controller.js" />
         <option value="$PROJECT_DIR$/user/course.model.js" />
-        <option value="$PROJECT_DIR$/user/user.controller.js" />
         <option value="$PROJECT_DIR$/user/user.model.js" />
         <option value="$PROJECT_DIR$/user/user.service.js" />
         <option value="$PROJECT_DIR$/user/reservation.model.js" />
+        <option value="$PROJECT_DIR$/user/user.controller.js" />
       </list>
     </option>
   </component>
@@ -351,18 +352,19 @@
       <workItem from="1574866251737" duration="1000" />
       <workItem from="1575540682162" duration="279000" />
       <workItem from="1575560836810" duration="12000" />
-      <workItem from="1575806843788" duration="3108000" />
+      <workItem from="1575806843788" duration="4481000" />
+      <workItem from="1575995651108" duration="592000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49890000" />
+    <option name="totallyTimeSpent" value="51855000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14526823" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14526823" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -409,27 +411,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/discussion.model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="19" lean-forward="true" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-244">
-          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/passport/lib/authenticator.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
@@ -437,31 +418,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/user.controller.js">
+    <entry file="file://$PROJECT_DIR$/user/reservation.model.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="95" column="19" lean-forward="true" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
+        <state relative-caret-position="1104">
+          <caret line="46" selection-start-line="46" selection-end-line="49" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user/user.service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
+        <state relative-caret-position="1392">
           <caret line="58" column="30" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/discussion.model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user/user.model.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1704">
-          <caret line="71" column="99" selection-start-line="71" selection-start-column="96" selection-end-line="71" selection-end-column="99" />
+        <state relative-caret-position="521">
+          <caret line="76" column="6" lean-forward="true" selection-start-line="73" selection-start-column="4" selection-end-line="76" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user/course.model.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
+        <state relative-caret-position="168">
+          <caret line="7" column="11" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -472,10 +474,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/reservation.model.js">
+    <entry file="file://$PROJECT_DIR$/user/user.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+        <state relative-caret-position="630">
+          <caret line="566" column="39" selection-start-line="566" selection-start-column="39" selection-end-line="566" selection-end-column="39" />
         </state>
       </provider>
     </entry>
