@@ -564,10 +564,12 @@ function getCourse(req, res) {
 
 function getUserCourse(req, res) {
     let userId =  req.query.userId;
+    console.log(getUserCourse);
     CourseModel.find({ members: [userId]}, function(err, courses) {
         if (err) { return res.status(400).json(err) }
+        console.log(courses);
         return courses
-    })
+    }).populate('members')
 }
 
 module.exports = router;
