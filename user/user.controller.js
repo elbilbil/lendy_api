@@ -568,7 +568,7 @@ function getUserCourse(req, res) {
     CourseModel.find({ members: [userId]}, function(err, courses) {
         if (err) { return res.status(400).json(err) }
         console.log(courses);
-        return courses
+        return res.status(200).json(courses)
     }).populate('members')
 }
 
