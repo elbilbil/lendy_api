@@ -14,8 +14,8 @@ const DiscussionModel = require('../user/discussion.model');
 const MessageModel = require('../user/message.model');
 var ObjectId = require('mongodb').ObjectID;
 var PicturesService = require('../utilities/pictures.service');
-const ReservationModel = require('./reservation.model');
-const CourseModel = require('./course.model');
+const ReservationModel = require('../user/reservation.model');
+const CourseModel = require('../user/course.model');
 
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
