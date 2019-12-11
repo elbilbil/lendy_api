@@ -14,6 +14,7 @@ const DiscussionModel = require('./discussion.model');
 const ReservationModel = require('./reservation.model');
 const MessageModel = require('./message.model');
 const CourseModel = require('./course.model');
+const NotificationModel = require('./notification.model');
 var ObjectId = require('mongodb').ObjectID;
 var PicturesService = require('../utilities/pictures.service');
 const ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -44,6 +45,7 @@ async function sendNotif(to, title, message, extras) {
         body: message,
         priority: 'high', // gcm, apn. Supported values are 'high' or 'normal' (gcm). Will be translated to 10 and 5 for apn. Defaults to 'high'
         contentAvailable: true, // gcm, apn. node-apn will translate true to 1 as required by apn.
+        category: 'MEETING_INVITATION', // apn and gcm for ios
     };
     if (extras) {
         data.custom = {
@@ -103,6 +105,26 @@ router.patch('/course', authenticate, updateCourse);
 router.get('/course', authenticate, getCourse);
 router.get('/user_courses', authenticate, getUserCourses);
 router.get('/user_contract', authenticate, getUserContract);
+router.post('/notification', authenticate, registerToken);
+router.get('/delete_notification', authenticate, desableNotif);
+
+function registerToken(req, res) {
+    let token = new NotificationModel({ member : req.user._id, token : req.body.token })
+    token.save(function(err, result) {
+        if (err) { return res.status(400).json(err) }
+        return res.status(200).json(result)
+    })
+}
+
+function desableNotif(req, res) {
+    NotificationModel.find({id : req.user._id}, function(err, notif) {
+        if (err) { return res.status(400).json(err) }
+        notif[0].remove(function(err, notification) {
+            if (err) { return res.status(400).json(err) }
+            return res.status(200).json(notification)
+        })
+    })
+}
 
 function update(req, res) {
     let reqUser = req.user;
