@@ -30,7 +30,7 @@ const settings = {
             keyId: '66268P6453',
             teamId: '9A7AXNX57L',
         },
-        production: true // true for APN production environment, false for APN sandbox environment,
+        production: false // true for APN production environment, false for APN sandbox environment,
     }
 };
 
