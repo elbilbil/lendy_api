@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9874d736-928e-4894-ba07-c4e9acda6e5f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/user.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/user/user.controller.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -77,12 +76,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="7343" />
+          <entry key="js" value="7383" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="7343" />
+          <entry key="JavaScript" value="7383" />
         </counts>
       </usages-collector>
     </session>
@@ -110,8 +109,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/user/user.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="573" column="29" selection-start-line="573" selection-start-column="29" selection-end-line="573" selection-end-column="29" />
+            <state relative-caret-position="605">
+              <caret line="60" column="58" selection-start-line="60" selection-start-column="58" selection-end-line="60" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -365,12 +364,12 @@
       <workItem from="1575560836810" duration="12000" />
       <workItem from="1575806843788" duration="4481000" />
       <workItem from="1575995651108" duration="1067000" />
-      <workItem from="1576059974267" duration="986000" />
+      <workItem from="1576059974267" duration="1332000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53316000" />
+    <option name="totallyTimeSpent" value="53662000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -488,8 +487,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/user/user.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="573" column="29" selection-start-line="573" selection-start-column="29" selection-end-line="573" selection-end-column="29" />
+        <state relative-caret-position="605">
+          <caret line="60" column="58" selection-start-line="60" selection-start-column="58" selection-end-line="60" selection-end-column="58" />
         </state>
       </provider>
     </entry>
