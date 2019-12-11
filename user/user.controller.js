@@ -53,6 +53,7 @@ async function sendNotif(to, title, message, extras) {
     push.send(to, data)
         .then((results) => {
             console.log(results)
+            console.log(results.message)
         })
         .catch((err) => {
             console.log(err);
