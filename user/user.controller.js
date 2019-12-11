@@ -27,8 +27,8 @@ const settings = {
     apn: {
         token: {
             key: 'kyklos_key.p8', // optionally: fs.readFileSync('./certs/key.p8')
-            keyId: '66268P6453',
-            teamId: '9A7AXNX57L',
+            keyId: '86YUK6GTZK',
+            teamId: '4B8FX5T86P',
         },
         production: false // true for APN production environment, false for APN sandbox environment,
     }
