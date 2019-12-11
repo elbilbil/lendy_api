@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9874d736-928e-4894-ba07-c4e9acda6e5f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/user/user.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/user/user.controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/user/user.service.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -77,12 +76,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="7426" />
+          <entry key="js" value="7447" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="7426" />
+          <entry key="JavaScript" value="7447" />
         </counts>
       </usages-collector>
     </session>
@@ -111,7 +110,7 @@
         <entry file="file://$PROJECT_DIR$/user/user.controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="298">
-              <caret line="70" column="32" selection-start-line="70" selection-start-column="32" selection-end-line="70" selection-end-column="32" />
+              <caret line="70" column="44" lean-forward="true" selection-start-line="70" selection-start-column="44" selection-end-line="70" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -128,8 +127,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/user/user.service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="621">
-              <caret line="144" column="25" selection-start-line="144" selection-start-column="25" selection-end-line="144" selection-end-column="25" />
+            <state relative-caret-position="564">
+              <caret line="140" column="61" selection-start-line="140" selection-start-column="61" selection-end-line="140" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -359,12 +358,12 @@
       <workItem from="1575560836810" duration="12000" />
       <workItem from="1575806843788" duration="4481000" />
       <workItem from="1575995651108" duration="1067000" />
-      <workItem from="1576059974267" duration="3614000" />
+      <workItem from="1576059974267" duration="4314000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55944000" />
+    <option name="totallyTimeSpent" value="56644000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -459,13 +458,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/course.model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="15" column="22" lean-forward="true" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/user/user.model.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -473,17 +465,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/user/course.model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="22" lean-forward="true" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/user/user.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
-          <caret line="70" column="32" selection-start-line="70" selection-start-column="32" selection-end-line="70" selection-end-column="32" />
+          <caret line="70" column="44" lean-forward="true" selection-start-line="70" selection-start-column="44" selection-end-line="70" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user/user.service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="144" column="25" selection-start-line="144" selection-start-column="25" selection-end-line="144" selection-end-column="25" />
+        <state relative-caret-position="564">
+          <caret line="140" column="61" selection-start-line="140" selection-start-column="61" selection-end-line="140" selection-end-column="61" />
         </state>
       </provider>
     </entry>
