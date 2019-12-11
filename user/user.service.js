@@ -139,8 +139,10 @@ class UserService {
                     let filename = 'img-' + new Date().getTime();
                     let destpath = path.join(__dirname, './static/images/users');
                     base64Img.img(userData.picture, destpath, filename, function (err, filepath) {
-                        if (err)
+                        if (err) {
+                            console.log(err);
                             resolve();
+                        }
                         else {
                             resolve(filepath.split('/').pop())
                         }
