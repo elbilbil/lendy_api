@@ -36,6 +36,7 @@ const authenticate = function (req, res, next) {
 
 // routes
 
+router.get('message', authenticate, getAllMessage)
 router.get('/users_stats', authenticate, getNumberStats);
 router.get('/users_messages_stats', authenticate, getNumberMessages);
 router.get('/runs', authenticate, getNumbersRun);
@@ -60,6 +61,12 @@ function getNumberStats(req, res) {
                 return res.status(200).json({ numberUsers : users.length, preteur : preteur.length, emprunteur : emprunteur.length})
             });
         });
+    })
+}
+
+function getAllMessage(req, res) {
+    MessageModel.find({}, function(err, mess) {
+        return res.status(200).json(mess.length);
     })
 }
 

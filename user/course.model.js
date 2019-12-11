@@ -23,6 +23,13 @@ const courseSchema = mongoose.Schema({
         },
         default: {latitude : 43.311360, longitude : 5.370490, address : "Rue Mirès 13003 Marseille"},
     },
+    destPlace : {
+        type: {
+            latitude : Number,
+            longitude : Number,
+            address : String
+        },
+        default: {latitude : 43.311360, longitude : 5.370490, address : "Rue Mirès 13003 Marseille"},
     meetingTime : {
         type : Number,
         required: true
