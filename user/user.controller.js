@@ -565,7 +565,8 @@ function getCourse(req, res) {
 
 function getUserCourses(req, res) {
     let userId =  req.query.userId;
-    CourseModel.find({ $all: { members: [userId]}} , function(err, courses) {
+
+    CourseModel.find({ members:{ $all: [userId]}} , function(err, courses) {
         if (err) { return res.status(400).json(err) }
         console.log(courses);
         return res.status(200).json(courses)
@@ -574,7 +575,8 @@ function getUserCourses(req, res) {
 
 function getUserContract(req, res) {
     let userId =  req.query.userId;
-    ReservationModel.find({ $all:{ members:[userId] }}, function(err, resa) {
+    
+    ReservationModel.find({ members: { $all : [userId] }}, function(err, resa) {
         if (err) { return res.status(400).json(err) }
         return res.status(200).json(resa)
     }).populate('members')
