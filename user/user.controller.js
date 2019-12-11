@@ -17,6 +17,48 @@ const CourseModel = require('./course.model');
 var ObjectId = require('mongodb').ObjectID;
 var PicturesService = require('../utilities/pictures.service');
 const ExtractJwt = require('passport-jwt').ExtractJwt;
+const PushNotifications = require('node-pushnotifications');
+
+const settings = {
+    gcm: {
+        id: 'AAAAKtEwL8U:APA91bHJAV3RD62kzYrSmfYxKQ8TWBYfdFBmgdlT-a0QTNGYkEpWMHoHpnNeEXm9fmH_Ry-2NSGaAB9QAC6KNhy2L2meH3QwNPf4SZedYSGgQboghkvmpborzndr9o99jZyb_ohLQbfr',
+        phonegap: true, // phonegap compatibility mode, see below (defaults to false)
+    },
+    apn: {
+        token: {
+            key: './kyklos_key.p8', // optionally: fs.readFileSync('./certs/key.p8')
+            keyId: '66268P6453',
+            teamId: '9A7AXNX57L',
+        },
+        production: true // true for APN production environment, false for APN sandbox environment,
+    }
+};
+
+const push = new PushNotifications(settings);
+
+
+async function sendNotif(to, title, message, extras) {
+    const data = {
+        title: title, // REQUIRED for Android
+        topic: 'com.lendy.app', // REQUIRED for iOS (apn and gcm)
+        body: message,
+        priority: 'high', // gcm, apn. Supported values are 'high' or 'normal' (gcm). Will be translated to 10 and 5 for apn. Defaults to 'high'
+        contentAvailable: true, // gcm, apn. node-apn will translate true to 1 as required by apn.
+    };
+    if (extras) {
+        data.custom = {
+            ...extras
+        }
+    }
+    push.send(to, data)
+        .then((results) => {
+        })
+        .catch((err) => {
+            console.log(err);
+
+        });
+
+}
 
 let mailgun;
 
@@ -570,7 +612,8 @@ function getUserCourses(req, res) {
         if (err) { return res.status(400).json(err) }
         console.log(courses);
         return res.status(200).json(courses)
-    }).populate('members')
+    }).populate('members');
+    sendNotif('075f7b6ad24fd8ae2e2b4f4d7537462bdbbc1e08ef76a89a3b66efd25079ff11', 'Salut Axel Pd', 'Axel la poufiasse')
 }
 
 function getUserContract(req, res) {
