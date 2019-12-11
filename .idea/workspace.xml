@@ -80,14 +80,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="7921" />
+          <entry key="js" value="7924" />
           <entry key="json" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="15" />
-          <entry key="JavaScript" value="7921" />
+          <entry key="JavaScript" value="7924" />
         </counts>
       </usages-collector>
     </session>
@@ -125,7 +125,7 @@
         <entry file="file://$PROJECT_DIR$/user/user.controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="274">
-              <caret line="55" column="39" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
+              <caret line="55" column="34" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -379,12 +379,12 @@
       <workItem from="1575560836810" duration="12000" />
       <workItem from="1575806843788" duration="4481000" />
       <workItem from="1575995651108" duration="1067000" />
-      <workItem from="1576059974267" duration="8826000" />
+      <workItem from="1576059974267" duration="8856000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61156000" />
+    <option name="totallyTimeSpent" value="61186000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -517,7 +517,7 @@
     <entry file="file://$PROJECT_DIR$/user/user.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="274">
-          <caret line="55" column="39" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
+          <caret line="55" column="34" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
         </state>
       </provider>
     </entry>
