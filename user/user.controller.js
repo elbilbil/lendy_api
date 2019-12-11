@@ -57,7 +57,7 @@ router.post('/comments', authenticate, commentResa);
 router.post('/course', authenticate, addCourse);
 router.patch('/course', authenticate, updateCourse);
 router.get('/course', authenticate, getCourse);
-router.get('/user_course', authenticate, getUserCourse);
+router.get('/user_course_contract', authenticate, getUserCourseAndContract);
 
 function update(req, res) {
     let reqUser = req.user;
@@ -562,13 +562,16 @@ function getCourse(req, res) {
     }).populate('members')
 }
 
-function getUserCourse(req, res) {
+function getUserCourseAndContract(req, res) {
     let userId =  req.query.userId;
     console.log(getUserCourse);
     CourseModel.find({ members: [userId]}, function(err, courses) {
         if (err) { return res.status(400).json(err) }
         console.log(courses);
-        return res.status(200).json(courses)
+        ReservationModel.find({members:[userId]}, function(err, resa) {
+            if (err) { return res.status(400).json(err) }
+            return res.status(200).json({ courses : courses, contrat : resa})
+        }).populate('members')
     }).populate('members')
 }
 
