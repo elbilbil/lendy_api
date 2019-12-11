@@ -14,6 +14,8 @@ const DiscussionModel = require('../user/discussion.model');
 const MessageModel = require('../user/message.model');
 var ObjectId = require('mongodb').ObjectID;
 var PicturesService = require('../utilities/pictures.service');
+const ReservationModel = require('./reservation.model');
+const CourseModel = require('./course.model');
 
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
@@ -62,13 +64,6 @@ function getNumberStats(req, res) {
 }
 
 function getNumberMessages(req, res) {
-/*let allowedRoles = ['superadmin'];
-if (allowedRoles.indexOf(req.user.role) < 0)
-    return res.status(403).json({
-        allowedRoles: allowedRoles,
-        requesterRole: req.user.role
-    });*/
-
     let reqContacts = req.params.usersId;
     const search = (reqContacts === undefined) ? {} : { $or: [ { members: [reqContacts[0], reqContacts[1]] },  { members: [reqContacts[1], reqContacts[0]]} ] };
     DiscussionModel.find(search, async function (err, discussions) {
@@ -88,43 +83,27 @@ if (allowedRoles.indexOf(req.user.role) < 0)
 }
 
 function getNumbersRun(req, res) {
-/*let allowedRoles = ['superadmin'];
-if (allowedRoles.indexOf(req.user.role) < 0)
-    return res.status(403).json({
-        allowedRoles: allowedRoles,
-        requesterRole: req.user.role
-    });*/
-return res.status(200).json({ runs : 23 })
+    CourseModel.find({}, function(err, course) {
+        return res.status(200).json(course.length)
+    })
 }
 
 function getCurrentRuns(req, res) {
-/*let allowedRoles = ['superadmin'];
-if (allowedRoles.indexOf(req.user.role) < 0)
-    return res.status(403).json({
-        allowedRoles: allowedRoles,
-        requesterRole: req.user.role
-    });*/
-return res.status(200).json([ {startTime : 1569078980728, finishTime : 1569078980739, location : {latitude : 43.311360, longitude : 5.370490} }])
+    CourseModel.find({state : "NOW"}, function(err, course) {
+        return res.status(200).json(course)
+    })
 }
 
 function getContracts(req, res) {
-/*let allowedRoles = ['superadmin'];
-if (allowedRoles.indexOf(req.user.role) < 0)
-    return res.status(403).json({
-        allowedRoles: allowedRoles,
-        requesterRole: req.user.role
-    });*/
-return res.status(200).json({contracts : 25})
+    ReservationModel.find({}, function(err, contract) {
+        return res.status(200).json(contract.length)
+    })
 }
 
 function getCurrentContracts(req, res) {
-/*let allowedRoles = ['superadmin'];
-if (allowedRoles.indexOf(req.user.role) < 0)
-    return res.status(403).json({
-        allowedRoles: allowedRoles,
-        requesterRole: req.user.role
-    });*/
-return res.status(200).json({ contracts : 3 })
+    ReservationModel.find({state: "NOW"}, function(err, resa) {
+        return res.status(200).json(resa)
+    })
 }
 
 function getAllUserLocation(rew, res) {
