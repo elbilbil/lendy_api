@@ -53,7 +53,7 @@ class UserService {
                 username: username//,
                 //password: this.encrypt(password)
             }).exec(function (err, user) {
-                console.log('1')
+                console.log('1');
                     if (err)
                         return reject(err);
                 console.log('2')
