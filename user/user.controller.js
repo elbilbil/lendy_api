@@ -26,7 +26,7 @@ const settings = {
     },
     apn: {
         token: {
-            key: './kyklos_key.p8', // optionally: fs.readFileSync('./certs/key.p8')
+            key: 'kyklos_key.p8', // optionally: fs.readFileSync('./certs/key.p8')
             keyId: '66268P6453',
             teamId: '9A7AXNX57L',
         },
