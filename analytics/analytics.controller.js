@@ -36,7 +36,7 @@ const authenticate = function (req, res, next) {
 
 // routes
 
-router.get('message', authenticate, getAllMessage)
+router.get('message', authenticate, getAllMessage);
 router.get('/users_stats', authenticate, getNumberStats);
 router.get('/users_messages_stats', authenticate, getNumberMessages);
 router.get('/runs', authenticate, getNumbersRun);
