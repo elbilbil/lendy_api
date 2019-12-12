@@ -68,7 +68,7 @@ async function sendToNotifToUsers(usersId, title, message, category, extras) {
     usersId.forEach(userId => {
         NotificationModel.find({member : userId}, function(err, notification) {
             if (!err) {
-                sendNotif(notification.token, title, message, category, extras)
+                sendNotif(notification[0].token, title, message, category, extras)
             }
         })
     })
