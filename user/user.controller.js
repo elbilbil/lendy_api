@@ -68,7 +68,9 @@ async function sendToNotifToUsers(usersId, title, message, category, extras) {
     usersId.forEach(userId => {
         NotificationModel.find({member : userId}, function(err, notification) {
             if (!err) {
-                sendNotif(notification[0].token, title, message, category, extras)
+                if (notification[0] != undefined) {
+                    sendNotif(notification[0].token, title, message, category, extras)
+                }
             }
         })
     })
@@ -629,7 +631,6 @@ function addCourse(req, res) {
             users.forEach(driver => {
                 drivers.push(`${driver._id}`)
             });
-            console.log(drivers)
             sendToNotifToUsers(drivers, 'Une nouvelle course est disponible', `Vous pouvez accepter une nouvelle course à ${new Date(courseTime)}`, 'ASK_COURSE', null)
             return res.status(200).json(result)
         });
@@ -649,7 +650,7 @@ function updateCourse(req, res) {
             }
         }
         UserModel.find({id : course.members[0]}, function(err, user) {
-            sendToNotifToUsers(drivers, 'Votre course a été accépté', `Votre chauffer ${user[0].fullName} a accepté votre course il sera donc au point de rendez-vous à ${new Date(course.meetingTime)}`, 'RESPONSE_COURSE', null)
+            sendToNotifToUsers(course.members[0], 'Votre course a été accépté', `Votre chauffer ${user[0].fullName} a accepté votre course il sera donc au point de rendez-vous à ${new Date(course.meetingTime)}`, 'RESPONSE_COURSE', null)
         });
         course.members = [...course.members, req.user._id];
         course.state = status;
