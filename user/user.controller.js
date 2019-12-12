@@ -498,14 +498,14 @@ function addSignature(req, res) {
                 reservation.signatures = [...reservation.signatures, {userId: req.user._id, signature: filename}];
                 reservation.save(function (err, resa) {
                     if (err) { return res.status(400).json(err)}
-                    console.log(reservation.members);
                     console.log(req.user._id);
+                    console.log(reservation.members);
                     console.log(reservation.members.filter(member => {
                         console.log(member)
                         console.log(req.user._id)
                         return member !== `${req.user._id}`
                     }));
-                    sendToNotifToUsers(reservation.members.filter(member => { return member !== req.user._id }), '', `${req.user.fullname} a signé le contrat`, 'HAS_SIGNED', null);
+                    sendToNotifToUsers(reservation.members.filter(member => { return member !== `${req.user._id}` }), '', `${req.user.fullname} a signé le contrat`, 'HAS_SIGNED', null);
                     return res.status(200).json(resa)
                 })
             })
