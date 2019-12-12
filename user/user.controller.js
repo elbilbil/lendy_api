@@ -624,7 +624,7 @@ function addCourse(req, res) {
 
     newCourse.save(function (err, result) {
         if (err) { return res.status(400).json(err) }
-        UserModel.find({type : emprunteur}, function(err, res) {
+        UserModel.find({type : 'emprunteur'}, function(err, res) {
             let drivers = [];
             res.forEach(driver => {
                 drivers.push(driver._id)
