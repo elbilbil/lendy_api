@@ -124,6 +124,7 @@ router.get('/delete_notification', authenticate, desableNotif);
 function registerToken(req, res) {
     let token = new NotificationModel({ member : req.user._id, token : req.body.token })
     token.save(function(err, result) {
+        console.log(result)
         if (err) { return res.status(400).json(err) }
         return res.status(200).json(result)
     })
