@@ -70,7 +70,14 @@ function getAllMessage(req, res) {
     })
 }
 
+
 function getNumberMessages(req, res) {
+    DiscussionModel.find( async function (err, discussions) {
+            return res.status(200).json( { messages : discussions.length })
+    });
+}
+
+function getNumberMessage(req, res) {
     let reqContacts = req.params.usersId;
     const search = (reqContacts === undefined) ? {} : { $or: [ { members: [reqContacts[0], reqContacts[1]] },  { members: [reqContacts[1], reqContacts[0]]} ] };
     DiscussionModel.find(search, async function (err, discussions) {
