@@ -504,7 +504,7 @@ function addSignature(req, res) {
                     reservation.signatures.forEach(signature => {
                         console.log(diffsigna)
                         console.log(signature.userId)
-                        if (diffsigna.find(signature.userId) === undefined) {
+                        if (diffsigna.find(elem => elem === signature.userId) === undefined) {
                             diffsigna.push(signature.userId);
                         }
                     });
