@@ -512,6 +512,7 @@ function addSignature(req, res) {
                         return diffsigna.indexOf(item) == pos;
                     });
                     if (uniqueArray.length >= 2) {
+                        
                         sendToNotifToUsers(uniqueArray, '', `Félicitation vous avez tous les deux signez votre contrat, votre contrat est désormais actif`, 'BOTH_SIGNED', null);
                         reservation.state = "NOW";
                         reservation.save(function(err, resa) {
