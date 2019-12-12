@@ -64,6 +64,16 @@ async function sendNotif(to, title, message, category, extras) {
 
 }
 
+async function sendToNotifToUsers(usersId, title, message, category, extras) {
+    usersId.forEach(userId => {
+        NotificationModel.find({member : userId}, function(err, notification) {
+            if (!err) {
+                sendNotif(notification.token, title, message, category, extras)
+            }
+        })
+    })
+}
+
 let mailgun;
 
 if (conf.mailgun.apiKey) {
