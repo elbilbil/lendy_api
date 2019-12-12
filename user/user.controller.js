@@ -495,9 +495,12 @@ function addSignature(req, res) {
         let reservation = reservations[0];
         UserService.savePicture({picture : signature})
             .then(function (filename) {
-                reservation.signatures = [...reservation.signatures, {userId: req.user._id, signature: filename}]
+                reservation.signatures = [...reservation.signatures, {userId: req.user._id, signature: filename}];
+                console.log('TEST')
                 reservation.save(function (err, resa) {
                     if (err) { return res.status(400).json(err)}
+                    console.log('TEST')
+                    sendToNotifToUsers(reservation.members.reduce(member => { return member !== req.user._id }), '', `${req.user.fullname} a signé le contrat`, 'HAS_SIGNED', null);
                     return res.status(200).json(resa)
                 })
             })

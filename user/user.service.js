@@ -134,8 +134,7 @@ class UserService {
                 resolve();
             else {
                 if (userData.picture.startsWith('http')) {
-                    console.log(`Reterning same image ${userData.picture}`);
-                    console.log(userData.picture);
+                    console.log(`Reterning same image`);
                     resolve(userData.picture)
                 } else {
                     console.log(`Creating new image`)
