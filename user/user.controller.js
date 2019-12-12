@@ -508,11 +508,9 @@ function addSignature(req, res) {
                             diffsigna.push(signature.userId);
                         }
                     });
-                    let uniqueArray = diffsigna.filter(function(item, pos) {
-                        return diffsigna.indexOf(item) == pos;
-                    });
-                    if (uniqueArray.length >= 2) {
-                        sendToNotifToUsers(uniqueArray, '', `Félicitation vous avez tous les deux signez votre contrat, votre contrat est désormais actif`, 'BOTH_SIGNED', null);
+                    let unique = [...new Set(diffsigna)];
+                    if (unique.length >= 2) {
+                        sendToNotifToUsers(unique, '', `Félicitation vous avez tous les deux signez votre contrat, votre contrat est désormais actif`, 'BOTH_SIGNED', null);
                         reservation.state = "NOW";
                         reservation.save(function(err, resa) {
                             return res.status(200).json(resa)
