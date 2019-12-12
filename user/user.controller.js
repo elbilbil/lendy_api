@@ -649,7 +649,7 @@ function updateCourse(req, res) {
                 if (err) { return res.status(400).json("Already Taken") }
             }
         }
-        sendToNotifToUsers([course.members[0]], 'Votre course a été accépté', `Votre chauffer ${req.user._id.fullName} a accepté votre course il sera donc au point de rendez-vous à ${new Date(course.meetingTime).toLocaleString()}`, 'RESPONSE_COURSE', null)
+        sendToNotifToUsers([course.members[0]], 'Votre course a été accépté', `Votre chauffer ${req.user.fullName} a accepté votre course il sera donc au point de rendez-vous à ${new Date(course.meetingTime).toLocaleString()}`, 'RESPONSE_COURSE', null)
         course.members = [...course.members, req.user._id];
         course.state = status;
         course.save(function(err, result) {
