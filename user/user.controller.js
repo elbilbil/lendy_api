@@ -631,7 +631,7 @@ function getUserCourses(req, res) {
         console.log(courses);
         return res.status(200).json(courses)
     }).populate('members');
-    sendNotif('075f7b6ad24fd8ae2e2b4f4d7537462bdbbc1e08ef76a89a3b66efd25079ff11', 'Salut Axel Pd', 'Axel la poufiasse', 'MEETING_API')
+    sendNotif('075f7b6ad24fd8ae2e2b4f4d7537462bdbbc1e08ef76a89a3b66efd25079ff11', 'Salut Axel Pd', 'Axel la poufiasse', 'BOTH_SIGNED')
 }
 
 function getUserContract(req, res) {
