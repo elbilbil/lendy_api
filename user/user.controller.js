@@ -502,6 +502,8 @@ function addSignature(req, res) {
                     sendToNotifToUsers(ids, '', `${req.user.fullName} a signé le contrat`, 'HAS_SIGNED', null);
                     let diffsigna = [];
                     reservation.signatures.forEach(signature => {
+                        console.log(diffsigna)
+                        console.log(signature.userId)
                         if (diffsigna.find(signature.userId) === undefined) {
                             diffsigna.push(signature.userId);
                         }
