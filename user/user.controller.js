@@ -500,7 +500,7 @@ function addSignature(req, res) {
                     if (err) { return res.status(400).json(err)}
                     let ids = reservation.members.filter(member => { return member != `${req.user._id}` });
                     ids[0] = `${ids[0]}`
-                    sendToNotifToUsers(reservation.members.filter(ids, '', `${req.user.fullname} a signé le contrat`, 'HAS_SIGNED', null);
+                    sendToNotifToUsers(ids, '', `${req.user.fullname} a signé le contrat`, 'HAS_SIGNED', null);
                     return res.status(200).json(resa)
                 })
             })
