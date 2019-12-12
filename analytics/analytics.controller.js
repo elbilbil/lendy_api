@@ -105,7 +105,7 @@ function getNumbersRun(req, res) {
 function getCurrentRuns(req, res) {
     CourseModel.find({state : "NOW"}, function(err, course) {
         return res.status(200).json(course)
-    }).
+    })
 }
 
 function getContracts(req, res) {
