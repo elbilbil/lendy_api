@@ -499,8 +499,6 @@ function addSignature(req, res) {
                 reservation.save(function (err, resa) {
                     if (err) { return res.status(400).json(err)}
                     let ids = reservation.members.filter(member => { return member != `${req.user._id}` });
-                    ids[0] = `${ids[0]}`
-                    console.log(ids)
                     sendToNotifToUsers(ids, '', `${req.user.fullName} a signé le contrat`, 'HAS_SIGNED', null);
                     return res.status(200).json(resa)
                 })
@@ -557,6 +555,7 @@ function postMessage(req, res) {
                             if (err) {
                                 return res.status(400).json(err)
                             }
+                            sendToNotifToUsers(...reqContacts, 'Vous avez reçu une nouveau message', reqMessage, 'TALK', null)
                             return res.status(200).json("Successfully added the new message")
                         })
                     });
