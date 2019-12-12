@@ -128,7 +128,7 @@ class UserService {
         })
     }
 
-    saveCarPicutre(userDate) {
+    saveCarPicutre(userData) {
         return new Promise(function (resolve, reject) {
             if (!userData.car.picture)
                 resolve();

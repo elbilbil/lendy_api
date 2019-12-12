@@ -163,7 +163,7 @@ function update(req, res) {
                                 UserModel.findByIdAndUpdate(reqUser.id, doc, {
                                     new: true
                                 }, function (err, result) {
-                                    
+
                                     if (err)
                                         return res.status(400).json(err);
                                     res.json(result)
