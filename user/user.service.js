@@ -133,11 +133,11 @@ class UserService {
             if (!userData.car.picture)
                 resolve();
             else {
-                if (userData.car.picture.startsWith('http')) {
+                if (userData.car.picture.startsWith('img-')) {
                     console.log(`Reterning same image`);
                     resolve(userData.car.picture)
                 } else {
-                    console.log(`Creating new image`)
+                    console.log(`Creating new image`);
                     let filename = 'img-' + new Date().getTime();
                     let destpath = path.join(__dirname, './static/images/users');
                     base64Img.img("data:image/png;base64," + userData.car.picture, destpath, filename, function (err, filepath) {
@@ -160,11 +160,11 @@ class UserService {
             if (!userData.picture)
                 resolve();
             else {
-                if (userData.picture.startsWith('http')) {
+                if (userData.picture.startsWith('img-')) {
                     console.log(`Reterning same image`);
                     resolve(userData.picture)
                 } else {
-                    console.log(`Creating new image`)
+                    console.log(`Creating new image profil`);
                     let filename = 'img-' + new Date().getTime();
                     let destpath = path.join(__dirname, './static/images/users');
                     base64Img.img("data:image/png;base64," + userData.picture, destpath, filename, function (err, filepath) {
