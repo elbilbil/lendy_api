@@ -504,13 +504,13 @@ function addSignature(req, res) {
                     console.log('================')
                     console.log(reservation.members.filter(member => {
                         console.log('================')
-                        console.log(`${req.user._id}`)
+                        console.log(req.user._id)
                         console.log(member)
-                        console.log(member !== `${req.user._id}`)
-                        return member !== `${req.user._id}`
+                        console.log(member != req.user._id})
+                        return member != `${req.user._id}`
                     }));
                     console.log('================')
-                    sendToNotifToUsers(reservation.members.filter(member => { return member !== `${req.user._id}` }), '', `${req.user.fullname} a signé le contrat`, 'HAS_SIGNED', null);
+                    sendToNotifToUsers(reservation.members.filter(member => { return member != `${req.user._id}` }), '', `${req.user.fullname} a signé le contrat`, 'HAS_SIGNED', null);
                     return res.status(200).json(resa)
                 })
             })
