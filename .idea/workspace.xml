@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9874d736-928e-4894-ba07-c4e9acda6e5f" name="Default Changelist" comment="" />
+    <list default="true" id="9874d736-928e-4894-ba07-c4e9acda6e5f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/user/user.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/user/user.controller.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -122,8 +124,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/user/user.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="635">
-              <caret line="514" column="24" selection-start-line="514" selection-start-column="24" selection-end-line="514" selection-end-column="24" />
+            <state relative-caret-position="366">
+              <caret line="504" column="47" lean-forward="true" selection-start-line="504" selection-start-column="47" selection-end-line="504" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -383,12 +385,12 @@
       <workItem from="1575560836810" duration="12000" />
       <workItem from="1575806843788" duration="4481000" />
       <workItem from="1575995651108" duration="1067000" />
-      <workItem from="1576059974267" duration="16854000" />
+      <workItem from="1576059974267" duration="17099000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69184000" />
+    <option name="totallyTimeSpent" value="69429000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -527,8 +529,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/user/user.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="635">
-          <caret line="514" column="24" selection-start-line="514" selection-start-column="24" selection-end-line="514" selection-end-column="24" />
+        <state relative-caret-position="366">
+          <caret line="504" column="47" lean-forward="true" selection-start-line="504" selection-start-column="47" selection-end-line="504" selection-end-column="47" />
         </state>
       </provider>
     </entry>
