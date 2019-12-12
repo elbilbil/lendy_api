@@ -500,17 +500,8 @@ function addSignature(req, res) {
                     if (err) { return res.status(400).json(err)}
                     let ids = reservation.members.filter(member => { return member != `${req.user._id}` });
                     sendToNotifToUsers(ids, '', `${req.user.fullName} a signé le contrat`, 'HAS_SIGNED', null);
-                    let diffsigna = [];
-                    reservation.signatures.forEach(signature => {
-                        console.log(diffsigna);
-                        console.log(signature.userId);
-                        if (diffsigna.find(elem => elem == signature.userId) === undefined) {
-                            diffsigna.push(signature.userId);
-                        }
-                    });
-                    let unique = [...new Set(diffsigna)];
                     if (unique.length >= 2) {
-                        sendToNotifToUsers(unique, '', `Félicitation vous avez tous les deux signez votre contrat, votre contrat est désormais actif`, 'BOTH_SIGNED', null);
+                        sendToNotifToUsers([ids[0], req.user._id], '', `Félicitation vous avez tous les deux signez votre contrat, votre contrat est désormais actif`, 'BOTH_SIGNED', null);
                         reservation.state = "NOW";
                         reservation.save(function(err, resa) {
                             return res.status(200).json(resa)
