@@ -501,6 +501,8 @@ function addSignature(req, res) {
                     console.log(reservation.members);
                     console.log(req.user._id);
                     console.log(reservation.members.filter(member => {
+                        console.log(member)
+                        console.log(req.user._id)
                         return member !== `${req.user._id}`
                     }));
                     sendToNotifToUsers(reservation.members.filter(member => { return member !== req.user._id }), '', `${req.user.fullname} a signé le contrat`, 'HAS_SIGNED', null);
