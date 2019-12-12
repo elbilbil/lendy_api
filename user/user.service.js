@@ -134,8 +134,11 @@ class UserService {
                 resolve();
             else {
                 if (userData.picture.startsWith('http')) {
+                    console.log(`Reterning same image ${userData.picture}`);
+                    console.log(userData.picture);
                     resolve(userData.picture)
                 } else {
+                    console.log(`Creating new image`)
                     let filename = 'img-' + new Date().getTime();
                     let destpath = path.join(__dirname, './static/images/users');
                     base64Img.img("data:image/png;base64," + userData.picture, destpath, filename, function (err, filepath) {

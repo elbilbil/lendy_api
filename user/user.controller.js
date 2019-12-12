@@ -139,11 +139,6 @@ function update(req, res) {
                         console.log(filename);
                         if (filename) {
                             doc.picture = filename;
-                            PicturesService.removeFile(reqUser.picture, 'users')
-                                .then(() => {
-                                }, err => {
-                                    return res.status(400).json(err)
-                                })
                         }
                         if (doc.password)
                             doc.password = UserService.encrypt(doc.password);
