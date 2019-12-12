@@ -642,7 +642,6 @@ function addCourse(req, res) {
         UserModel.find({type : 'emprunteur'}, function(err, users) {
             let drivers = [];
             users.forEach(driver => {
-                if (user)
                 drivers.push(`${driver._id}`)
             });
             sendToNotifToUsers(drivers, 'Une nouvelle course est disponible', `Vous pouvez accepter une nouvelle course à ${new Date(courseTime).toLocaleString()}`, 'ASK_COURSE', null)
