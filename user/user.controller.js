@@ -499,6 +499,7 @@ function addSignature(req, res) {
                 reservation.save(function (err, resa) {
                     if (err) { return res.status(400).json(err)}
                     console.log(reservation.members);
+                    console.log(req.user._id);
                     console.log(reservation.members.filter(member => {
                         return member !== `${req.user._id}`
                     }));
