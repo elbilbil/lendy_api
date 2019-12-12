@@ -463,6 +463,7 @@ function addReservation(req, res) {
                 const newReservation = new ReservationModel({ since : sinceDate, to : toDate, state : "PENDING", meetingPlace : place, meetingTime : time, members : [reqUser._id, userRequestedId] })
                 newReservation.save(function(err, reservation) {
                     if (err) { return res.status(400).json(err) }
+                    sendToNotifToUsers([userRequestedId], 'Un nouveau rendez-vous est disponible', `Une nouvelle demande de rendez-vous est disponible de la part de ${reqUser.fullName}`, 'ASK_MEETING', null)
                     reqUser.reservations = [...reqUser.reservations, newReservation];
                     user.reservations = [...user.reservations, newReservation];
                     reqUser.save(function(err, result) {
@@ -620,9 +621,17 @@ function addCourse(req, res) {
     let meetingPlace = req.body.place;
 
     let newCourse = new CourseModel({members: [req.user._id], state : 'PENDING', meetingPlace: meetingPlace, meetingTime: courseTime});
+
     newCourse.save(function (err, result) {
         if (err) { return res.status(400).json(err) }
-        return res.status(200).json(result)
+        UserModel.find({type : emprunteur}, function(err, res) {
+            let drivers = [];
+            res.forEach(driver => {
+                drivers.push(driver._id)
+            });
+            sendToNotifToUsers(drivers, 'Une nouvelle course est disponible', `Vous pouvez accepter une nouvelle course à ${new Date(courseTime)}`, 'ASK_COURSE', null)
+            return res.status(200).json(result)
+        });
     })
 }
 
@@ -638,6 +647,9 @@ function updateCourse(req, res) {
                 if (err) { return res.status(400).json("Already Taken") }
             }
         }
+        UserModel.find({id : course.members[0]}, function(err, user) {
+            sendToNotifToUsers(drivers, 'Votre course a été accépté', `Votre chauffer ${user[0].fullName} a accepté votre course il sera donc au point de rendez-vous à ${new Date(course.meetingTime)}`, 'RESPONSE_COURSE', null)
+        });
         course.members = [...course.members, req.user._id];
         course.state = status;
         course.save(function(err, result) {
