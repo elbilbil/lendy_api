@@ -624,9 +624,9 @@ function addCourse(req, res) {
 
     newCourse.save(function (err, result) {
         if (err) { return res.status(400).json(err) }
-        UserModel.find({type : 'emprunteur'}, function(err, res) {
+        UserModel.find({type : 'emprunteur'}, function(err, users) {
             let drivers = [];
-            res.forEach(driver => {
+            users.forEach(driver => {
                 drivers.push(driver._id)
             });
             sendToNotifToUsers(drivers, 'Une nouvelle course est disponible', `Vous pouvez accepter une nouvelle course à ${new Date(courseTime)}`, 'ASK_COURSE', null)
