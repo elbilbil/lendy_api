@@ -148,19 +148,26 @@ function update(req, res) {
             else {
                 UserService.savePicture(doc)
                     .then(function (filename) {
-                        console.log(filename);
-                        if (filename) {
-                            doc.picture = filename;
-                        }
-                        if (doc.password)
-                            doc.password = UserService.encrypt(doc.password);
-                        UserModel.findByIdAndUpdate(reqUser.id, doc, {
-                            new: true
-                        }, function (err, result) {
-                            if (err)
-                                return res.status(400).json(err);
-                            res.json(result)
-                        })
+                        UserService.saveCarPicutre(doc)
+                            .then(function (carFileName) {
+                                console.log(filename);
+                                console.log(carFileName);
+                                if (filename) {
+                                    doc.picture = filename;
+                                }
+                                if (carFileName) {
+                                    doc.car.picture = carFileName
+                                }
+                                if (doc.password)
+                                    doc.password = UserService.encrypt(doc.password);
+                                UserModel.findByIdAndUpdate(reqUser.id, doc, {
+                                    new: true
+                                }, function (err, result) {
+                                    if (err)
+                                        return res.status(400).json(err);
+                                    res.json(result)
+                                })
+                            })
                     })
             }
         })

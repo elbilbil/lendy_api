@@ -128,6 +128,33 @@ class UserService {
         })
     }
 
+    saveCarPicutre(userDate) {
+        return new Promise(function (resolve, reject) {
+            if (!userData.car.picture)
+                resolve();
+            else {
+                if (userData.car.picture.startsWith('http')) {
+                    console.log(`Reterning same image`);
+                    resolve(userData.car.picture)
+                } else {
+                    console.log(`Creating new image`)
+                    let filename = 'img-' + new Date().getTime();
+                    let destpath = path.join(__dirname, './static/images/users');
+                    base64Img.img("data:image/png;base64," + userData.car.picture, destpath, filename, function (err, filepath) {
+                        if (err) {
+                            console.log(err);
+                            resolve();
+                        }
+                        else {
+                            console.log(`Saved Image ${filepath}`);
+                            resolve(filepath.split('/').pop())
+                        }
+                    })
+                }
+            }
+        })
+    }
+
     savePicture(userData) {
         return new Promise(function (resolve, reject) {
             if (!userData.picture)
