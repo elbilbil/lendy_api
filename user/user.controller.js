@@ -504,6 +504,9 @@ function addSignature(req, res) {
                     console.log('================')
                     console.log(reservation.members.filter(member => {
                         console.log('================')
+                        console.log(`${req.user._id}`)
+                        console.log(member)
+                        console.log(member !== `${req.user._id}`)
                         return member !== `${req.user._id}`
                     }));
                     console.log('================')
