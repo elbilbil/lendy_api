@@ -38,14 +38,14 @@ const settings = {
 const push = new PushNotifications(settings);
 
 
-async function sendNotif(to, title, message, extras) {
+async function sendNotif(to, title, message, category, extras) {
     const data = {
         title: title, // REQUIRED for Android
         topic: 'com.lendy.app', // REQUIRED for iOS (apn and gcm)
         body: message,
         priority: 'high', // gcm, apn. Supported values are 'high' or 'normal' (gcm). Will be translated to 10 and 5 for apn. Defaults to 'high'
         contentAvailable: true, // gcm, apn. node-apn will translate true to 1 as required by apn.
-        category: 'MEETING_INVITATION', // apn and gcm for ios
+        category: category, // apn and gcm for ios
     };
     if (extras) {
         data.custom = {
@@ -147,7 +147,6 @@ function update(req, res) {
                         }
                         if (doc.password)
                             doc.password = UserService.encrypt(doc.password);
-                        console.log(doc);
                         UserModel.findByIdAndUpdate(reqUser.id, doc, {
                             new: true
                         }, function (err, result) {
@@ -637,7 +636,7 @@ function getUserCourses(req, res) {
         console.log(courses);
         return res.status(200).json(courses)
     }).populate('members');
-    sendNotif('075f7b6ad24fd8ae2e2b4f4d7537462bdbbc1e08ef76a89a3b66efd25079ff11', 'Salut Axel Pd', 'Axel la poufiasse')
+    sendNotif('075f7b6ad24fd8ae2e2b4f4d7537462bdbbc1e08ef76a89a3b66efd25079ff11', 'Salut Axel Pd', 'Axel la poufiasse', 'MEETING_API')
 }
 
 function getUserContract(req, res) {

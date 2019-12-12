@@ -144,6 +144,7 @@ class UserService {
                             resolve();
                         }
                         else {
+                            console.log(`Saved Image ${filepath}`);
                             resolve(filepath.split('/').pop())
                         }
                     })
