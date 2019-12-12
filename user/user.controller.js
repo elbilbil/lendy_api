@@ -650,7 +650,7 @@ function updateCourse(req, res) {
             }
         }
         console.log(course.members[0])
-        UserModel.find({id : course.members[0]}, function(err, user) {
+        UserModel.find({id : `${course.members[0]}`}, function(err, user) {
             console.log(user)
             sendToNotifToUsers(course.members[0], 'Votre course a été accépté', `Votre chauffer ${user[0].fullName} a accepté votre course il sera donc au point de rendez-vous à ${new Date(course.meetingTime)}`, 'RESPONSE_COURSE', null)
         });
