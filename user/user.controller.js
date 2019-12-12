@@ -115,6 +115,7 @@ router.post('/comments', authenticate, commentResa);
 router.post('/course', authenticate, addCourse);
 router.patch('/course', authenticate, updateCourse);
 router.get('/course', authenticate, getCourse);
+router.get('/user_course', authenticate, getUserCourse);
 router.get('/user_courses', authenticate, getUserCourses);
 router.get('/user_contract', authenticate, getUserContract);
 router.post('/notification', authenticate, registerToken);
@@ -689,6 +690,13 @@ function getUserContract(req, res) {
     let userId =  req.query.userId;
 
     ReservationModel.find({ members: { $all : [userId] }}, function(err, resa) {
+        if (err) { return res.status(400).json(err) }
+        return res.status(200).json(resa)
+    }).populate('members')
+}
+
+function getUserCourse(req, res) {
+    CourseModel.find({ members: { $all : [req.user._id] }}, function(err, resa) {
         if (err) { return res.status(400).json(err) }
         return res.status(200).json(resa)
     }).populate('members')
