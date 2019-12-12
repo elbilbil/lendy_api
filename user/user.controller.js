@@ -504,13 +504,16 @@ function addSignature(req, res) {
                     reservation.signatures.forEach(signature => {
                         console.log(diffsigna);
                         console.log(signature.userId);
-                        if (diffsigna.find(elem => elem == signature.userId) === undefined) {
+                        if (diffsigna.find(elem => elem != signature.userId) === undefined) {
                             diffsigna.push(signature.userId);
                         }
                     });
+                    console.log(diffsigna);
+
                     if (diffsigna.length >= 2) {
                         sendToNotifToUsers(diffsigna, '', `Félicitation vous avez tous les deux signez votre contrat, votre contrat est désormais actif`, 'BOTH_SIGNED', null);
-                        reservation.state = "NOW"
+                        reservation.state = "NOW";
+                        reservation.save();
                     }
                     return res.status(200).json(resa)
                 })
