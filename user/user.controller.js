@@ -555,7 +555,7 @@ function postMessage(req, res) {
                             if (err) {
                                 return res.status(400).json(err)
                             }
-                            sendToNotifToUsers(...reqContacts, 'Vous avez reçu une nouveau message', reqMessage, 'TALK', null)
+                            sendToNotifToUsers(reqContacts, 'Vous avez reçu une nouveau message', reqMessage, 'TALK', null)
                             return res.status(200).json("Successfully added the new message")
                         })
                     });
