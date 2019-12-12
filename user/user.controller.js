@@ -631,7 +631,7 @@ function addCourse(req, res) {
             users.forEach(driver => {
                 drivers.push(`${driver._id}`)
             });
-            sendToNotifToUsers(drivers, 'Une nouvelle course est disponible', `Vous pouvez accepter une nouvelle course à ${new Date(courseTime)}`, 'ASK_COURSE', null)
+            sendToNotifToUsers(drivers, 'Une nouvelle course est disponible', `Vous pouvez accepter une nouvelle course à ${new Date(courseTime).toLocaleString()}`, 'ASK_COURSE', null)
             return res.status(200).json(result)
         });
     })
@@ -649,10 +649,7 @@ function updateCourse(req, res) {
                 if (err) { return res.status(400).json("Already Taken") }
             }
         }
-        console.log(course.members[0])
-        UserModel.find({_id : course.members[0]}, function(err, user) {
-            sendToNotifToUsers([course.members[0]], 'Votre course a été accépté', `Votre chauffer ${user[0].fullName} a accepté votre course il sera donc au point de rendez-vous à ${new Date(course.meetingTime)}`, 'RESPONSE_COURSE', null)
-        });
+        sendToNotifToUsers([course.members[0]], 'Votre course a été accépté', `Votre chauffer ${req.user._id.fullName} a accepté votre course il sera donc au point de rendez-vous à ${new Date(course.meetingTime).toLocaleString()}`, 'RESPONSE_COURSE', null)
         course.members = [...course.members, req.user._id];
         course.state = status;
         course.save(function(err, result) {
