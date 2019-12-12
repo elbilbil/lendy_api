@@ -133,6 +133,7 @@ function registerToken(req, res) {
 }
 
 function desableNotif(req, res) {
+    console.log(req.user._id)
     NotificationModel.find({member : req.user._id}, function(err, notif) {
         if (err) { return res.status(400).json(err) }
         notif[0].remove(function(err, notification) {
