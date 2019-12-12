@@ -629,6 +629,7 @@ function addCourse(req, res) {
             users.forEach(driver => {
                 drivers.push(driver._id)
             });
+            console.log(drivers)
             sendToNotifToUsers(drivers, 'Une nouvelle course est disponible', `Vous pouvez accepter une nouvelle course à ${new Date(courseTime)}`, 'ASK_COURSE', null)
             return res.status(200).json(result)
         });
