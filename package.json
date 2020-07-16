@@ -21,7 +21,7 @@
     "i18next-express-middleware": "^1.4.1",
     "jade": "^1.11.0",
     "jsonwebtoken": "^8.3.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.19",
     "mailgun-js": "^0.20.0",
     "mongoose": "^4.13.17",
     "mongoose-unique-validator": "^1.0.6",
