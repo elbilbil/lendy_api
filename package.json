@@ -15,7 +15,7 @@
     "base64-img": "^1.0.4",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "generate-password": "^1.4.1",
     "i18next": "^10.6.0",
     "i18next-express-middleware": "^1.4.1",
